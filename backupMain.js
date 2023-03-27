@@ -26,6 +26,44 @@ var userDetails = {
   phone:    'n/a'
 };
 
+// User Variables
+var hit = false;
+var score = 0;
+var count = 0;
+var miss = 0;
+var userHighscore
+
+// barrier
+var spot = {
+  x: 100,
+  y: 100,
+}
+
+// timer
+const timer = document.getElementById("g_timer");
+var timerInterval;
+
+// colour
+var col = {
+  r: 0,
+  g: 0,
+  b: 0,
+}
+
+// Canvas Container
+const elmnt = document.getElementById("speedPC");
+
+// Velocity Array
+const BALLVEL = [-7,-6,-5,-4,-3,3,4,5,6,7];
+const BALLVELNEG = [-7,-6,-5,-4,-3]
+const BALLVELPOS = [3,4,5,6,7]
+
+// Ball Array
+var ball = []
+var ballRadius = 25;
+var hits = 0;
+var px2ball = [];
+
 
 /*************************************************************/
 // FUNCTIONS
@@ -41,7 +79,58 @@ var userDetails = {
 function setup(){
   fb_initialise();
   fb_login(userDetails);
+  hit == false;
   frameRate(60)
+  document.getElementById("currentHS").innerHTML = userDetails.score;
+  var speed = random(BALLVEL);
+  var speedY = random(BALLVEL);
+  cnv = createCanvas(0, 0); 
+  cnv.mousePressed(mouseClicked)
+  // bouncing ball object
+  for (let i = 0; i < 3; i++) {
+      ball[i] = {
+        
+    x: random(100, 300),
+    y: random(100, 300),
+        
+    speed: random(BALLVEL),
+    speedY: random(BALLVEL),
+    radius: 25,
+    diameter: 50,
+  // Display the ball 
+  display: function(){
+    col.r = 255;
+    col.g = 255;
+    col.b = 255;
+    spot.x = random(0, width);
+    spot.y = random(0, height);
+    ellipse(this.x, this.y, this.diameter, this.diameter);
+    fill(col.r,col.g,col.b);
+  },
+  // Ball Speed 
+  move: function(){
+    this.x = this.x + this.speed;
+    this.y = this.y + this.speedY;
+  },
+  // Ball Bounce
+  bounce: function(){
+    if(this.x + this.radius > width){
+      this.speed = random(BALLVELNEG);
+      this.x = elmnt.offsetWidth - 25;
+  } else if(this.x - this.radius < 0){
+      this.speed = random(BALLVELPOS);
+      this.x = 25;
+  }
+  if(this.y + this.radius > height){
+    this.speedY = random(BALLVELNEG);
+    this.y = elmnt.offsetHeight - 25;
+  } else if(this.y - this.radius < 0){
+      this.speedY = random(BALLVELPOS);
+        this.y = 25;
+      }
+    }
+  }
+  }
 }
 
 // CONNECT TO FIREBASE AFTER SETUP
@@ -58,10 +147,75 @@ var database = firebase.database();
 function draw(){
   // Set Form Name And Email
     regEmailName()
+  // Canvas
+  background(200, 200, 200);
+  // Ball object
+  for (let i = 0; i < ball.length; i++) {
+  ball[i].bounce();
+  ball[i].display();
+  ball[i].move();
+  }
+  // Distance to ball
+ dToBall();
 }
 
 /**************************************************************/
-  
+// setupCvs Function (Setup Canvas)
+// Called by Start Button
+// Sets canvas to DIV dimensions inorder to match user screen
+// Input:  Canvas container's height and width
+// Return: n/a
+/**************************************************************/
+function setupCvs(){
+ cnv = createCanvas(elmnt.offsetWidth, elmnt.offsetHeight);
+ cnv.parent('speedPC');
+console.log(elmnt.offsetHeight + "/" + elmnt.offsetWidth);
+  startTimer();
+}
+
+/**************************************************************/
+// StartTimer Function
+// Called by setupCvs
+// Creates timer and starts counting down from 30, resets score and misses to 0
+// Input:  n/a
+// Return: Scores + Misses
+/**************************************************************/
+function startTimer(){
+  readRec();
+  // reset misses + score
+  hit == true;
+  miss = 0;
+  score = 0;
+  console.log(elmnt.offsetWidth)
+  document.getElementById("currentHS").innerHTML = userDetails.score;
+  document.getElementById("p_score").innerHTML = score;
+  document.getElementById("p_misses").innerHTML = miss;
+  document.getElementById("b_start").style.display = "none";
+  // timer
+  clearInterval(timerInterval);
+  var second = 30;
+  var minute = 0;
+  var hour = 0;
+  timerInterval = setInterval(function () {
+  timer.classList.toggle('odd');
+    timer.innerHTML =
+      (hour ? hour + ":" : "") +
+      (minute < 10 ? "0" + minute : minute) +
+      ":" +
+      (second < 10 ? "0" + second : second);
+    second--;
+    // when timer finishes
+    if (second == -1) {
+    clearInterval(timerInterval);
+    gameOver()
+    }
+    // if timer is still going
+    if(second >= -1){
+  document.getElementById("p_score").innerHTML = score;
+  document.getElementById("p_misses").innerHTML = miss;
+    }
+  }, 1000);
+};
 
 /**************************************************************/
 // gameOver Function
@@ -70,6 +224,20 @@ function draw(){
 // Input:  user score / highscore
 // Return: n/a
 /**************************************************************/
+// Game Over Function
+function gameOver(){
+  // bring back start button
+  document.getElementById("b_start").style.display = "block";
+  // check for highscore
+  if(userDetails.score <= score || userDetails.score == 'n/a'){
+    writeRec();
+  }
+   cnv = createCanvas(0, 0);
+  // update metrics
+  document.getElementById("currentHS").innerHTML = userDetails.score;
+  document.getElementById("p_score").innerHTML = score;
+  document.getElementById("p_misses").innerHTML = miss;
+}
 
 /**************************************************************/
 // dToBall Function (Distance To Ball)
@@ -78,6 +246,11 @@ function draw(){
 // Input: Ball length, ball.x, ball.y, mouse.X, mouse.Y
 // Return: Distance to ball
 /**************************************************************/
+function dToBall (){
+    for (i = 0; i < ball.length; i++) {
+    px2ball[i] = dist(ball[i].x, ball[i].y, mouseX, mouseY);
+  }
+}
 
 /**************************************************************/
 // mouseClicked Function
@@ -86,6 +259,18 @@ function draw(){
 // Input:  Distance to ball
 // Return: n/a
 /**************************************************************/
+function mouseClicked(){
+  for (var i = 0; i < ball.length; i++) {
+    if (px2ball[i] <= ballRadius) {
+      ball[i].x = random(20, 380);
+      ball[i].y = random(20, 380);
+    }
+  }
+    hit = px2ball.some(function (e) {
+    return e <= ballRadius;
+  });
+  cnv.mousePressed(hitOrMiss)
+} 
 
 
 /**************************************************************/
@@ -95,6 +280,16 @@ function draw(){
 // Input:  n/a
 // Return: Hits + Misses
 /**************************************************************/
+function hitOrMiss(){
+    if (hit == true) {
+      score += 1;
+      console.log("p_score: "+ score);
+  }
+    else if (hit == false){
+      miss += 1;
+      console.log("p_miss:" + miss);
+    }
+}
 
 /**************************************************************/
 // speedButton Function
@@ -204,7 +399,7 @@ function writeRec() {
 // Called by create lobby button
 /*****************************************************/
 function createGameLobby() {
-  firebase.database().ref('gameLobby/' + 'GTN/' + userDetails.name + '/P1/').set({
+  firebase.database().ref('gameLobby/' + userDetails.name + '/P1/').set({
     userName: userDetails.gameName,
     online: 'true',
     photoURL: userDetails.photoURL,
