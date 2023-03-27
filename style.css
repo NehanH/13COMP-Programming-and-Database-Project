@@ -1,0 +1,182 @@
+/*************************************************************
+  Written by Nehan Hettiarachchi, Term 2 2022
+*************************************************************/
+/*------------------------------------------------------------*
+  GENERAL STYLING
+/*------------------------------------------------------------*/
+html, body {
+  margin: 0px;
+  padding: 0px;
+  font-family: Comfortaa-Regular;
+  color: black;
+  background-image: url('Images/Artboard 1.png');
+  background-size: cover;
+ 
+}
+/* Login Button */
+.loginBtn {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition: 0.3s;
+}
+
+.loginBtn:hover {
+  background-color: #ff0000;
+  color: white;
+}
+
+/* Canvas */
+canvas {
+  display: block;
+}
+
+/* Landing Page */
+#lp{
+  display: block;
+  height: 100vh;
+}
+
+#lp_title{
+  padding-top: 150px;
+  font-family: comfortaa;
+  font-size: 150px;
+}
+#ls_title{
+  padding-top: 100px;
+  font-family: comfortaa;
+  font-size: 150px;
+}
+
+.landingPageBox{
+  border: solid black 2px;
+  width: 50%;
+  margin: auto;
+}
+
+#landingPageRow{
+  height: 90%;
+  padding-top: 20px;
+}
+
+/* Canvas Container */
+#speedPC{
+   height: 97%;
+}
+
+#speedPageRow{
+  height: 97%;
+  
+}
+
+/* Game Page */
+#gp{
+  display: none;
+  height: 100vh;
+}
+
+/* Speed Page */
+#ls{
+  display: none;
+  height: 100vh
+}
+#sp{
+  display: none;
+  height: 100vh
+}
+
+.button1{
+  font-size: 34px;
+}
+
+.gameTimer{
+  font-size: 40px;
+}
+
+.subText{
+  font-size: 40px;
+}
+
+.misses{
+  font-size: 40px;
+}
+
+.score{
+  font-size: 40px;
+}
+
+/* Instructions Paragraph */
+.paraText{
+  font-size: 25px;
+  color: black;
+}
+/*------------------------------------------------------------*
+  Page styling
+/*------------------------------------------------------------*/
+html, body {
+  background-color: rgb(100, 100, 100);
+  margin: 0;
+  padding: 0;
+  font-family: tahoma;
+  font-size: 10px;
+  color: white;
+}
+canvas {
+  display: block;
+  padding: 15px;
+}
+
+h1, h2, h3 { 
+  padding-left: 15px;
+  display: inline-block;
+}
+
+p { 
+  font-size: 15px;
+  margin: 5px 0px 0px 15px;
+  display: inline-block;
+}
+
+#b_name, #b_start { 
+  margin: 5px 0px 0px 50px;
+}
+
+/*------------------------------------------------------------*
+  REGISTRATION page styling
+/*------------------------------------------------------------*/
+#rp {
+  display: none;
+  height:  100%;
+  width: 50%;
+  /* The line below is just so you can see the form during testing //<========*/ 
+}
+
+.transparentBG {
+  background: rgba(169, 169, 169, 0.7);
+  color: black;
+}
+
+/*------------------------------------------------------------*
+  ADMIN page & BUTTON styling
+/*------------------------------------------------------------*/
+#s_adminPage {
+  display: none;
+  height: 86vh;
+  overflow: scroll;
+}
+
+#b_lpAdmin {
+  display: none;   /* none = don't display element */
+}
+
+#b_gpAdmin {
+  display: none;   /* none = don't display element */
+}
+
+/*************************************************************
+/*    END OF CSS
+*************************************************************/
