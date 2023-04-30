@@ -75,7 +75,7 @@ canvas {
 
 /* Game Page */
 #gp{
-  display: none;
+  display: block;
   height: 100vh;
 }
 

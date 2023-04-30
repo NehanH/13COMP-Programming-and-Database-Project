@@ -147,9 +147,7 @@ function login() {
   const user = firebase.auth().currentUser;
   if (user) {
   console.log(userDetails.gameName)
-  document.getElementById("b_login").style.display = "none";
-  document.getElementById("lp").style.display = "none";
-  document.getElementById("gp").style.display = "block";
+  document.location.href = "https://13comp-programming-and-db-assessment-nehanhettiarach.13comp-gl-2023.repl.co/gameLobby.html";
   regEmailName();
   createAdminData();
   readAdminData();
