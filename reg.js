@@ -62,7 +62,7 @@ function reg_regDetailsEntered() {
     // call your function to write to details record firebase         //<=======
     fb_writeRec(DETAILS, userDetails.uid, userDetails);
     document.getElementById("rp").style.display = "none";
-    document.getElementById("gp").style.display = "block";
+    document.getElementById("lp").style.display = "none";
 
   }
 }
