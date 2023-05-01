@@ -38,9 +38,9 @@ function regEmailName(){
   document.getElementById("p_regEmail").innerHTML = userDetails.email       //<=======
 }
 /**************************************************************/
-// reg_regDetailsEntered()
-// Input event; called when user clicks ?????????? button               //<========
-// Write user's details to DB
+// reg_checkUserRegister()
+// Input event; called when user clicks register button           
+// checks to see if user's gameName has been updated and then saves details into session storage and redirects.
 // Input:   
 // Return:
 /**************************************************************/
