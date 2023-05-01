@@ -3,12 +3,13 @@
 // Written by Nehan Hettiarachchi  2023
 /*****************************************************/
 
-const DETAILS = "userDetails"; 
+const DETAILS = userDetails; 
 
 var loginStatus = ' ';
 var readStatus  = ' ';
 var writeStatus = ' ';
 var readSuccess = ' ';
+var ss_userDetails;
 
 // userDetails object
 var userDetails = {
@@ -30,20 +31,23 @@ function draw(){
   regEmailName()
 }
 
+function ss_store(_key, _value){
+  sessionStorage.setItem(_key,  JSON.stringify(_value));
+}
+
 function login() {
   fb_readRec(DETAILS, userDetails.uid, userDetails);
   fb_login(userDetails);
   console.log(loginStatus);
   const user = firebase.auth().currentUser;
-  if (user) {
+  if (user && loginStatus == "logged in") {
   console.log(userDetails.gameName)
-  document.getElementById("b_login").style.display = "none";
-  document.getElementById("lp").style.display = "none";
-  document.getElementById("rp").style.display = "none";
+  ss_store("details", userDetails);
+  window.location.href = "https://13comp-programming-and-db-assessment-nehanhettiarach.13comp-gl-2023.repl.co/gp.html";
   regEmailName();
   } else if (user == null) {
   console.log(userDetails.gameName)
-    document.getElementById("b_login").style.display = "none";
+  document.getElementById("b_login").style.display = "none";
   document.getElementById("lp").style.display = "none";
   document.getElementById("rp").style.display = "block";
   regEmailName();

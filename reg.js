@@ -29,7 +29,6 @@
          files from the zipped folder.                                  //<=======
     7. Upload all the images to you projects images folder.             //<=======
 *************************************************************/      
-
   // These two lines need to be executed only after the                 //<=======
   //  registration page is displayed                                    //<=======
   // Save name & email into the form
@@ -38,7 +37,19 @@ function regEmailName(){
   document.getElementById("p_regName").innerHTML  = userDetails.name        //<=======    
   document.getElementById("p_regEmail").innerHTML = userDetails.email       //<=======
 }
-
+/**************************************************************/
+// reg_regDetailsEntered()
+// Input event; called when user clicks ?????????? button               //<========
+// Write user's details to DB
+// Input:   
+// Return:
+/**************************************************************/
+function reg_checkUserRegister(){
+  if(userDetails.gameName != null){
+  ss_store("details", userDetails);
+  window.location.href = "https://13comp-programming-and-db-assessment-nehanhettiarach.13comp-gl-2023.repl.co/gp.html";
+  }
+}
 /**************************************************************/
 // reg_regDetailsEntered()
 // Input event; called when user clicks ?????????? button               //<========
@@ -61,9 +72,7 @@ function reg_regDetailsEntered() {
   if (document.getElementById('f_reg').checkValidity()) {
     // call your function to write to details record firebase         //<=======
     fb_writeRec(DETAILS, userDetails.uid, userDetails);
-    document.getElementById("rp").style.display = "none";
-    document.getElementById("lp").style.display = "none";
-
+    reg_checkUserRegister();
   }
 }
 
@@ -80,6 +89,7 @@ function reg_getFormItemValue(_elementId, _item) {
     
   return document.getElementById(_elementId).elements.item(_item).value;
 }
+
 
 /**************************************************************/
 //    END OF PROG

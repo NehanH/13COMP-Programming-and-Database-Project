@@ -7,33 +7,39 @@
   <meta name="keywords" content="12COMP, firebase, 'mini skills'">
   <meta name="author" content="nehan hettiarachchi">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- stylesheets *******************************************-->
-  <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--*******************************************************************************
+			                            STYLESHEETS 
+********************************************************************************-->
+  <link rel="stylesheet"      
+        href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/4.7.0/css/font-    
+        awesome.min.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">    
   <link rel="stylesheet" href="style.css">
-  <!-- P5.js *************************************************-->
+<!--*******************************************************************************
+			                               P5.JS 
+********************************************************************************-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
- <!--
-  <!-- firebase start ****************************************-->
+<!--*******************************************************************************
+			                              FIREBASE 
+********************************************************************************-->
   <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>  
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>  
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script> 
-  <!-- firebase end ******************************************-->
-
-  <!-- Your modules ******************************************-->
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script> 
+<!--*******************************************************************************
+			                              MODULES
+********************************************************************************-->
   <script defer src="main.js"></script>
   <script defer src="firebase.js"></script> 
   <script defer src="reg.js"></script> 
 </head>
 <body>
 <!--*******************************************************************************
-			LANDING PAGE 
-  ********************************************************************************-->
+			                           LANDING PAGE 
+********************************************************************************-->
 <body class="w3-center w3-container">
   <section id="lp" class="w3-center">
     <div>
@@ -45,9 +51,9 @@
       <button id="b_login" onclick="login()">Login</button>
     </div>
   </section>
-  <!--*******************************************************************************
-			REGISTRATION PAGE 
-  ********************************************************************************-->
+<!--*******************************************************************************
+			                         REGISTRATION PAGE 
+********************************************************************************-->
   <section id="rp">
     <div id="rp_page" class="w3-container w3-small">
       <form id="f_reg" onsubmit="return false;" class="w3-container w3-card-4 transparentBG">
@@ -114,12 +120,11 @@
                   click to register
           </button>
         </div>
-        
       </form>
     </div>
   </section>
-  <!--*******************************************************************************
+<!--*******************************************************************************
 			END OF REGISTRATION PAGE 
-  ********************************************************************************-->
+********************************************************************************-->
 </body>
 </html>
