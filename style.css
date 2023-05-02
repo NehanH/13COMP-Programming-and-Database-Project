@@ -32,6 +32,7 @@ h1 {
   color: white;
 }
 
+
 .lp_Welcome {
   font-size: 50px;
   font-family: comfortaa;
@@ -75,14 +76,28 @@ h1 {
 /*------------------------------------------------------------*
   Game Page Styling
 /*------------------------------------------------------------*/
+#gp_title{
+  font-family: comfortaa;
+  font-size: 150px;
+  color: white;
+}
+
+#userProfile{
+display: block;
+margin: auto;
+}
+
 .gp_header{
  padding: 20px;
+  margin:auto;
 }
 
 .gp_userDetails{
   font-size: 30px;
   font-family: comfortaa;
   color: white;
+  text-align: center;
+  margin: auto;
 }
 
 /*************************************************************
