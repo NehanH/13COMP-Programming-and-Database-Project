@@ -39,6 +39,10 @@ h1 {
   animation-iteration-count: infinite;
 }
 
+#b_goToGames{
+  display: none;
+  margin: auto;
+}
 /*------------------------------------------------------------*
   ANIMATIONS
 /*------------------------------------------------------------*/

@@ -21,6 +21,8 @@ var userDetails = {
   phone:    'n/a'
 };
 
+
+
 function setup(){
   fb_initialise();
 }
@@ -39,11 +41,11 @@ function login() {
   fb_login(userDetails);
   console.log(loginStatus);
   const user = firebase.auth().currentUser;
-  if (user && loginStatus == "logged in" && userDetails.gameName != null) {
+  if (user && loginStatus == "logged in" && userDetails.gameName != null && userDetails.gameName != 'undefined') {
   console.log(userDetails.gameName)
   ss_store("details", userDetails);
-  window.location.href = "https://13comp-programming-and-db-assessment-nehanhettiarach.13comp-gl-2023.repl.co/gp.html";
   regEmailName();
+  window.location.href = "https://13comp-programming-and-db-assessment-nehanhettiarach.13comp-gl-2023.repl.co/gp.html";
   } else if (user == null) {
   console.log(userDetails.gameName)
   document.getElementById("b_login").style.display = "none";
@@ -54,7 +56,8 @@ function login() {
 }
 
 function saveSS(){
-  var userDetails = JSON.parse(sessionStorage.getItem(details));
+ var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
+  console.log(ss_userDetails.gameName);
 }
 /*************************************************************/
 //      END OF APP

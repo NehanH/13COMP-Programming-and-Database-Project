@@ -157,7 +157,6 @@ function fb_readRec(_path, _key, _data) {
       _data.gameName    = dbData.gameName;
       _data.phone       = dbData.phone;
       console.log(dbData.gameName)
-      document.getElementById("currentHS").innerHTML = dbData.score;
       
     }
   };
