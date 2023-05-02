@@ -153,7 +153,8 @@ function fb_readRec(_path, _key, _data) {
       _data.name        = dbData.name;
       _data.email       = dbData.email;
       _data.photoURL    = dbData.photoURL;
-      _data.score       = dbData.score;
+      _data.win         = dbData.win;
+      _data.loss        = dbData.loss;
       _data.gameName    = dbData.gameName;
       _data.phone       = dbData.phone;
       console.log(dbData.gameName)
