@@ -100,6 +100,27 @@ margin: auto;
   margin: auto;
 }
 
+.gp_buttons{
+  margin: auto;
+}
+
+#ls{
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+#ls_title{
+  padding-top: 100px;
+  font-family: comfortaa;
+  font-size: 150px;
+}
+
+#s_table{
+  display:none;
+  height: 95vh;
+}
+
 /*************************************************************
 /*    END OF CSS
 *************************************************************/

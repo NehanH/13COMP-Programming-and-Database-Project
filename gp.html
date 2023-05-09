@@ -38,6 +38,7 @@
   <script defer src="firebase.js"></script> 
   <script defer src="reg.js"></script> 
   <script defer src="gp.js"></script> 
+  <script defer src="html_buildLobby.js"></script> 
 </head>
 <!--*******************************************************************************
 			                        GAME SELECTION PAGE
@@ -49,8 +50,56 @@
       <p class="gp_userDetails" id="userName"></p>
       <p class="gp_userDetails" id="userWinLoss"></p>
     </header>
-    <div class="w3-container">
+    <div class="gp_buttons w3-center w3-container">
       <h1 id="gp_title"class="w3-animate-opacity w3-center w3-wide">Game Selection</h1>
+            <button  class="button1" onclick="fakeButton()">Tic Tac Toe</button>
+      <button id="speedButton" class="button1" onclick="lobbyButton()">Rock Paper Scissors</button>
+         <button  class="button1" onclick="fakeButton()">Space Invaders</button>
     </div>
+  </section>
+<!--*******************************************************************************
+			Lobby Select
+********************************************************************************-->
+  <section id="s_table" class="w3-grey">
+    <header>
+      <!--ROW 1 ++++++++++++++++++++++++++++++++++++++-->
+      <div class="w3-row-padding w3-margin-top w3-blue">
+        <div class="w3-col s4 m4 l4">
+          <h1>Build a Lobby</h1>
+        </div>
+      </div>
+
+      <!--ROW 2 ++++++++++++++++++++++++++++++++++++++-->
+      <div class="w3-row-padding w3-margin-top">
+        <div class='w3-col s12 m6 l4'>
+          <button id='b_getData' class='b_options 
+            w3-button w3-disabled w3-xlarge w3-border w3-brown'
+            style='width: 100%;'
+            onclick="html_getData()">get data</button>
+        </div>
+                
+        <div class='w3-col s12 m6 l4'>
+          <button class='b_part2
+            w3-button w3-disabled w3-xlarge w3-border w3-brown'
+            style='width: 100%;'
+            onclick="html_reset()">reset</button>
+        </div>
+      </div>
+    </header>
+    
+    <main>
+      <table class="w3-table-all w3-border w3-hoverable w3-margin-top">
+        <tr class="w3-light-grey">
+          <th>name</th>
+          <th class="w3-center">wins</th>
+          <th class="w3-center">draws</th>
+          <th class="w3-center">losses</th>
+          <th>uid</th>
+          <th>Join</th>
+        </tr>
+        <tbody id="tb_userDetails">
+        </tbody>
+      </table>
+    </main>
   </section>
 </body>

@@ -56,19 +56,6 @@ function login() {
   }
 }
 
-function saveSS(){
- var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
-  console.log(ss_userDetails.photoURL);
-  console.log(ss_userDetails.gameName);
-  console.log(ss_userDetails.win);
-  console.log(ss_userDetails.loss);
-  document.getElementById("userProfile").src = ss_userDetails.photoURL;
-  var element = document.getElementById("userName");
-  element.innerHTML = ss_userDetails.gameName;
-  var elementWL = document.getElementById("userWinLoss");
-  elementWL.innerHTML = ss_userDetails.win + '/' + ss_userDetails.loss;
-}
-
 /*************************************************************/
 //      END OF APP
 /*************************************************************/
