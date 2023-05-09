@@ -1,7 +1,11 @@
-/*****************************************************/
-// main.js
-// Written by Nehan Hettiarachchi  2023
-/*****************************************************/
+/*************************************************************
+  firebase.js
+  
+  Written by Nehan Hettiarachchi, Term 1 2023
+  Javascript for index.html, has userDetails object, login function which checks if the user exists in the database, setup + draw     functions, ss_store() which saves the userDetails object to session storage.
+  V1: Copied 12COMP project setup, draw and login functions aswell as variables to main.js
+  V2: Added ss_store()
+*************************************************************/
 
 const DETAILS = "userDetails"; 
 
@@ -22,21 +26,32 @@ var userDetails = {
   phone:    'n/a'
 };
 
-
-
+// Setup function
 function setup(){
   fb_initialise();
 }
-
+// Draw function
 function draw(){
   // Set Form Name And Email
   regEmailName()
 }
-
+/**************************************************************/
+// ss_store(_key, _value)
+// Called by login function
+// Saves userDetails object to session storage
+// Input:  userDetails Object
+// Return: n/a
+/**************************************************************/
 function ss_store(_key, _value){
   sessionStorage.setItem(_key,  JSON.stringify(_value));
 }
-
+/**************************************************************/
+// login()
+// Called by login button press
+// Logs user in with google authentication and checks if user exists in database or not.
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function login() {
   fb_readRec(DETAILS, userDetails.uid, userDetails);
   fb_login(userDetails);

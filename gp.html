@@ -7,42 +7,30 @@
   <meta name="keywords" content="12COMP, firebase, 'mini skills'">
   <meta name="author" content="nehan hettiarachchi">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--*******************************************************************************
-			                            STYLESHEETS 
-********************************************************************************-->
+<!-- Stylesheets *************************************************-->
   <link rel="stylesheet"      
         href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/4.7.0/css/font-    
         awesome.min.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">    
-  <link rel="stylesheet" href="style.css">
-<!--*******************************************************************************
-			                               P5.JS 
-********************************************************************************-->
+  <link rel="stylesheet" href="css/style.css">
+<!-- P5.js *************************************************-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
-<!--*******************************************************************************
-			                              FIREBASE 
-********************************************************************************-->
+<!-- Firebase *************************************************-->
   <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>  
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>  
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script> 
-
-
-<!--*******************************************************************************
-			                              MODULES
-********************************************************************************-->
-  <script defer src="main.js"></script>
-  <script defer src="firebase.js"></script> 
-  <script defer src="reg.js"></script> 
-  <script defer src="gp.js"></script> 
-  <script defer src="html_buildLobby.js"></script> 
+<!-- Javascript Modules *************************************************-->
+  <script defer src="javascript/main.js"></script>
+  <script defer src="javascript/firebase.js"></script> 
+  <script defer src="javascript/reg.js"></script> 
+  <script defer src="javascript/gp.js"></script> 
+  <script defer src="javascript/html_buildLobby.js"></script> 
 </head>
-<!--*******************************************************************************
-			                        GAME SELECTION PAGE
-********************************************************************************-->
+<!-- Game Selection Page *************************************************-->
 <body onload="saveSS();">
   <section id="gp">
     <header class="gp_header">
@@ -56,50 +44,5 @@
       <button id="speedButton" class="button1" onclick="lobbyButton()">Rock Paper Scissors</button>
          <button  class="button1" onclick="fakeButton()">Space Invaders</button>
     </div>
-  </section>
-<!--*******************************************************************************
-			Lobby Select
-********************************************************************************-->
-  <section id="s_table" class="w3-grey">
-    <header>
-      <!--ROW 1 ++++++++++++++++++++++++++++++++++++++-->
-      <div class="w3-row-padding w3-margin-top w3-blue">
-        <div class="w3-col s4 m4 l4">
-          <h1>Build a Lobby</h1>
-        </div>
-      </div>
-
-      <!--ROW 2 ++++++++++++++++++++++++++++++++++++++-->
-      <div class="w3-row-padding w3-margin-top">
-        <div class='w3-col s12 m6 l4'>
-          <button id='b_getData' class='b_options 
-            w3-button w3-disabled w3-xlarge w3-border w3-brown'
-            style='width: 100%;'
-            onclick="html_getData()">get data</button>
-        </div>
-                
-        <div class='w3-col s12 m6 l4'>
-          <button class='b_part2
-            w3-button w3-disabled w3-xlarge w3-border w3-brown'
-            style='width: 100%;'
-            onclick="html_reset()">reset</button>
-        </div>
-      </div>
-    </header>
-    
-    <main>
-      <table class="w3-table-all w3-border w3-hoverable w3-margin-top">
-        <tr class="w3-light-grey">
-          <th>name</th>
-          <th class="w3-center">wins</th>
-          <th class="w3-center">draws</th>
-          <th class="w3-center">losses</th>
-          <th>uid</th>
-          <th>Join</th>
-        </tr>
-        <tbody id="tb_userDetails">
-        </tbody>
-      </table>
-    </main>
   </section>
 </body>

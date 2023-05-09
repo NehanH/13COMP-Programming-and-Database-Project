@@ -1,3 +1,11 @@
+/*************************************************************
+  firebase.js
+  
+  Written by Nehan Hettiarachchi, Term 1 2023
+  Connects firebase to the project aswell as all the functions which will read and write user data to the database.
+  V1: Added firebase config
+  V2: Added login, read, readall and write functions from 12COMP project.
+*************************************************************/
 function fb_initialise() {
   var firebaseConfig = {
   apiKey: "AIzaSyCs10NnQ4BIdtlDxmGMoLJgZ-OkNIu6VFM",
@@ -18,7 +26,7 @@ function fb_initialise() {
 }
 /**************************************************************/
 // fb_login(_dataRec)
-// Called by setup
+// Called by login() in main.js
 // Login to Firebase
 // Input:  object to save login data to
 // Return: n/a
