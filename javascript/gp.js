@@ -35,9 +35,10 @@ function saveSS(){
 /**************************************************************/
 function lobbyButton(){
   document.getElementById("gp").style.display = "none";
-  document.getElementById("s_table").style.display = "block";
+  document.getElementById("ls").style.display = "block";
 }
 
 function fakeButton(){
   alert('This is just for show, pick Rock Paper Scissors To Play The Game!')
 }
+
