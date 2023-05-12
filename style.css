@@ -76,6 +76,10 @@ display: block;
 margin: auto;
 }
 
+.waitingModal{
+  margin:auto;
+}
+
 .gp_header{
  padding: 20px;
   margin:auto;
@@ -117,6 +121,10 @@ margin: auto;
   margin: 15px;
 }
 
+#waitingForUser{
+  display:none;
+}
+
 /*** Game Screen Styling *********************************************************/
 #RPS{
   display: none;
@@ -133,9 +141,17 @@ margin: auto;
   height: 520px;
 }
 
-.player1, .player2{
-  margin: 5px;
+.player1{
+  margin: 50px;
   width: 200px;
+  text-align: center;
+  font-family: comfortaa;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.player2{
+  margin: 50px;
   text-align: center;
   font-family: comfortaa;
   font-size: 30px;
@@ -147,6 +163,7 @@ margin: auto;
     border-radius: 20px;
     padding: 5px;
 }
+
 
 .fake-choices1{
   display: none;

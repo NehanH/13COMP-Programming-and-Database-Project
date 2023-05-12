@@ -13,13 +13,17 @@ function createLobby(){
     p2UID: '',
     p1Name: ss_userDetails.gameName,
     p2Name: '',
-    turn: 0,
     win: ''
   });
   sessionStorage.setItem('gameStart', false);
   sessionStorage.setItem('currentGame', firebase.auth().currentUser.uid);
   document.getElementById("ls").style.display = "none";
   document.getElementById("RPS").style.display = "block";
-
-  
+     
+  if (sessionStorage.getItem('gameStart') == 'false') {
+        document.getElementById("waitingForUser").style.display = 'block'
+    }
+    console.log()
+    waitingScreen();
 }
+
