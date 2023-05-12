@@ -111,8 +111,49 @@ margin: auto;
 }
 
 /*** Lobby select styling *********************************************************/
-.lobbyContainer{
-  max-width: 75vh;
+
+.RPSLobby{
+  max-width: 1100px;
+  margin: 15px;
+}
+
+/*** Game Screen Styling *********************************************************/
+#RPS{
+  display: none;
+}
+
+.game-area{
+  display:flex;
+  justify-content: space-between;
+}
+
+.game-status{
+  border: 4px double black;
+  width: 500px;
+  height: 520px;
+}
+
+.player1, .player2{
+  margin: 5px;
+  width: 200px;
+  text-align: center;
+  font-family: comfortaa;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.rock:hover, .paper:hover, .scissors:hover {
+    border: 4px dotted rgb(45, 96, 153);
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.fake-choices1{
+  display: none;
+}
+
+.fake-choices2{
+  display: none;
 }
 
 /*** End of CSS *********************************************************/

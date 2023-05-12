@@ -40,15 +40,91 @@
     </header>
     <div class="gp_buttons w3-center w3-container">
       <h1 id="gp_title"class="w3-animate-opacity w3-center w3-wide">Game Selection</h1>
-            <button  class="button1" onclick="fakeButton()">Tic Tac Toe</button>
+      <button  class="button1" onclick="fakeButton()">Tic Tac Toe</button>
       <button id="speedButton" class="button1" onclick="lobbyButton()">Rock Paper Scissors</button>
-         <button  class="button1" onclick="fakeButton()">Space Invaders</button>
+      <button  class="button1" onclick="fakeButton()">Space Invaders</button>
     </div>
   </section>
 <!-- Lobbies Section *************************************************-->
   <section id="ls">
-    <div id="lobbyContainer" class="w3-center">
+    <div id="lobbyContainer" class="w3-center w3-display-bottommiddle">
       <button onclick="createLobby()" class="button1">Create</button>
+    </div>
+    <table class="RPSLobby w3-table w3-display-middle w3-bordered">
+      <thead>
+        <tr>
+          <th class="lobbyName">Game<th>
+            <th>Players</th>
+        </tr>
+      </thead>
+      <tbody id="RPS_gameLobby"></tbody>
+    </table>
+  </section>
+<!-- Rock Paper Scissors Game *************************************************-->
+  <section id="RPS">
+    <div class="row">
+      <div class="game-area col-md-12">
+        <div class="player1">
+          <h1 id="player1">Waiting</h1>
+          <div class="choices1">
+            <div class="rock">
+              <img src="Images/Rock.png" alt="Rock" width="120px" height="150px">
+            </div>
+            <div class="paper">
+              <img src="Images/Paper.png" alt="Paper" width="120px" height="150px">
+            </div>
+            <div class="scissors">
+              <img src="Images/Scissors.png" alt="Scissors" width="120px" height="150px">
+            </div>
+          </div>
+          <div class="fake-choices1">
+            <div class="frock">
+              <img src="Images/Rock.png" alt="Rock" width="150px" height="150px">
+            </div>
+            <div class="fPaper">
+              <img src="Images/Paper.png" alt="Paper" width="150px" height="150px">
+            </div>
+            <div class="fScissors">
+              <img src="Images/Scissors.png" alt="Scissors" width="150px" height="150px">
+            </div>
+          </div>
+        </div>
+        <div class="w3-display-middle game-status">
+          <div class="score-tracker text-center">
+            WINS:
+            <span id="wins"></span>
+            <br>
+            LOSSES:
+            <span id="losses"></span>
+          </div> 
+        </div>
+
+        <div class="player2">
+          <h1 id="player2">Waiting</h1>
+          <div class="choices2">
+            <div class="rock">
+              <img src="Images/Rock.png" alt="Rock" width="120px" height="150px">
+            </div>
+            <div class="paper">
+              <img src="Images/Paper.png" alt="Paper" width="120px" height="150px">
+            </div>
+            <div class="scissors">
+              <img src="Images/Scissors.png" alt="Scissors" width="120px" height="150px">
+            </div>
+          </div>
+          <div class="fake-choices2">
+            <div class="frock">
+              <img src="Images/Rock.png" alt="Rock" width="150px" height="150px">
+            </div>
+            <div class="fPaper">
+              <img src="Images/Paper.png" alt="Paper" width="150px" height="150px">
+            </div>
+            <div class="fScissors">
+              <img src="Images/Scissors.png" alt="Scissors" width="150px" height="150px">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </body>

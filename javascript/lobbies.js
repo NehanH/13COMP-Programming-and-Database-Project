@@ -16,4 +16,10 @@ function createLobby(){
     turn: 0,
     win: ''
   });
+  sessionStorage.setItem('gameStart', false);
+  sessionStorage.setItem('currentGame', firebase.auth().currentUser.uid);
+  document.getElementById("ls").style.display = "none";
+  document.getElementById("RPS").style.display = "block";
+
+  
 }
