@@ -1,14 +1,24 @@
 /*************************************************************
   lobbies.js
   
-  Written by Nehan Hettiarachchi, Term 1 2023
+  Written by Nehan Hettiarachchi, Term 2 2023
   Javascript for multiplayer lobbies.
   V1: Add createLobby() Function
+  V2: Add refreshLobby() Function
+  V3: Add fillLobbies() Function
 *************************************************************/
 
+// Unactive lobbies object
 var gameList = [];
 var gameListCount;
 
+/**************************************************************/
+// createLobby()
+// Called by create button
+// Creates a new entry under userLobbies/
+// Input:  gameName, UID
+// Return: n/a
+/**************************************************************/
 function createLobby(){
   var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
   firebase.database().ref('userLobbies/' + 'RPS/' + 'unActive/' + firebase.auth().currentUser.uid).set({
@@ -32,6 +42,13 @@ function createLobby(){
     waitingScreen();
 }
 
+/**************************************************************/
+// refreshLobby()
+// Called by refresh button
+// Updates lobby table with newly made lobbies
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function refreshLobby() {
   document.getElementById("RPS_tableBody").innerHTML = "";
   firebase.database().ref('userLobbies/' + 'RPS/' + 'unActive/').once('value',
@@ -46,18 +63,24 @@ function refreshLobby() {
             return
             } else {
               gameName = refGameUID.p1Name + "'s game";
-             }
-            var p1UID = refGameUID.p1UID;
-            var p1Name = refGameUID.p1Name;
-            var p2UID = refGameUID.p2UID;
-            var p2Name = refGameUID.p2Name;
-            var gameStatus = refGameUID.gameStart;
-            fillLobbies(gameName, p1UID, p1Name, p2UID, p2Name, gameStatus);
+            }
+          var p1UID = refGameUID.p1UID;
+          var p1Name = refGameUID.p1Name;
+          var p2UID = refGameUID.p2UID;
+          var p2Name = refGameUID.p2Name;
+          var gameStatus = refGameUID.gameStart;
+          fillLobbies(gameName, p1UID, p1Name, p2UID, p2Name, gameStatus);
       },
     );
   });
 }
-
+/**************************************************************/
+// fillLobbies()
+// Called by refreshLobby()
+// Update HTML table with info + create join button
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function fillLobbies(gameName, p1UID, p1Name, p2UID, p2Name, gameStatus) {
     var tbody = document.getElementById('RPS_tableBody');
     var trow = document.createElement('tr');
