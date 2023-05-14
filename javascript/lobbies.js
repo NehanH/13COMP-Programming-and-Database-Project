@@ -6,6 +6,9 @@
   V1: Add createLobby() Function
 *************************************************************/
 
+var gameList = [];
+var gameListCount;
+
 function createLobby(){
   var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
   firebase.database().ref('userLobbies/' + 'RPS/' + 'unActive/' + firebase.auth().currentUser.uid).set({
@@ -13,6 +16,8 @@ function createLobby(){
     p2UID: '',
     p1Name: ss_userDetails.gameName,
     p2Name: '',
+    p1Pick: '',
+    p2Pick: '',
     win: ''
   });
   sessionStorage.setItem('gameStart', false);
@@ -27,3 +32,58 @@ function createLobby(){
     waitingScreen();
 }
 
+function refreshLobby() {
+  document.getElementById("RPS_tableBody").innerHTML = "";
+  firebase.database().ref('userLobbies/' + 'RPS/' + 'unActive/').once('value',
+    function(AllRecords) {
+      AllRecords.forEach(
+        function(currentRecord) {
+          console.log("Current Record:")
+          console.log(currentRecord)
+          var refGameUID = currentRecord.val();
+          var gameName;
+          if (refGameUID.p1Name == null) {
+            return
+            } else {
+              gameName = refGameUID.p1Name + "'s game";
+             }
+            var p1UID = refGameUID.p1UID;
+            var p1Name = refGameUID.p1Name;
+            var p2UID = refGameUID.p2UID;
+            var p2Name = refGameUID.p2Name;
+            var gameStatus = refGameUID.gameStart;
+            fillLobbies(gameName, p1UID, p1Name, p2UID, p2Name, gameStatus);
+      },
+    );
+  });
+}
+
+function fillLobbies(gameName, p1UID, p1Name, p2UID, p2Name, gameStatus) {
+    var tbody = document.getElementById('RPS_tableBody');
+    var trow = document.createElement('tr');
+    var td0 = document.createElement('td');
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
+    var join = document.createElement('button')
+
+    console.log("gameName:")
+    console.log(gameName)
+
+    td0.innerHTML = gameName;
+    td1.innerHTML = '1/2';
+    if (gameName == null) {
+        return
+    }
+    else {
+        join.type = 'button'
+        join.innerHTML = 'Join'
+        join.value = p1UID;
+        join.setAttribute("onclick", `joinGame("${p1UID}")`)
+    }
+    gameList.push([gameName, p1UID, p1Name, p2UID, p2Name, gameStatus]);
+    td2.appendChild(join);
+    trow.appendChild(td0);
+    trow.appendChild(td1);
+    trow.appendChild(td2);
+    tbody.appendChild(trow);
+};

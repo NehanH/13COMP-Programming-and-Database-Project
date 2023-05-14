@@ -49,7 +49,9 @@
   <section id="ls">
     <div id="lobbyContainer" class="w3-center w3-display-bottommiddle">
       <button onclick="createLobby()" class="button1">Create</button>
+      <button onclick="refreshLobby()" class="button1">Refresh</button>
     </div>
+  <div id="RPS_gameLobby">
     <table class="RPSLobby w3-table w3-display-middle w3-bordered">
       <thead>
         <tr>
@@ -57,8 +59,9 @@
             <th>Players</th>
         </tr>
       </thead>
-      <tbody id="RPS_gameLobby"></tbody>
+      <tbody id="RPS_tableBody"></tbody>
     </table>
+  </div>
   </section>
 
 <div id="waitingForUser" class="w3-modal" width="200px">
