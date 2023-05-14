@@ -110,3 +110,37 @@ function fillLobbies(gameName, p1UID, p1Name, p2UID, p2Name, gameStatus) {
     trow.appendChild(td2);
     tbody.appendChild(trow);
 };
+/**************************************************************/
+// joinGame(_joinID)
+// Called by join button
+// Update HTML table with info + create join button
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+
+function joinGame(_joinID){
+  var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
+  var player2Name = ss_userDetails.gameName;
+  var player2UID = ss_userDetails.uid
+  document.getElementById("ls").style.display = "none";
+  document.getElementById("RPS").style.display = "block";
+  sessionStorage.setItem('currentGame', _joinID);
+  console.log(ss_userDetails.gameName);
+  console.log(ss_userDetails.uid);
+    firebase.database().ref('userLobbies/' + 'RPS/' + 'unActive/').child(_joinID).update({
+        p2Name: player2Name,
+        p2UID: player2UID,
+    })
+  firebase.database().ref('userLobbies/' + 'RPS/' + 'unActive/' + _joinID).once('value', (snapshot => {
+    var currentGame = snapshot.val()
+    firebase.database().ref('userLobbies/' + 'RPS/' + 'active/').update({
+      [_joinID]: currentGame
+        });
+    firebase.database().ref('userLobbies/' + 'RPS/' + 'unActive/' + _joinID + '/').remove();
+  })) 
+}
+
+
+
+  
+  
