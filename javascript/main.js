@@ -61,7 +61,7 @@ function login() {
   console.log(userDetails.gameName)
   ss_store("details", userDetails);
   regEmailName();
-  window.location.href = "https://13comp-programming-and-db-assessment-nehanhettiarach.13comp-gl-2023.repl.co/gp.html";
+  window.location.href = "/gp.html"
   } else if (user == null) {
   console.log(userDetails.gameName)
   document.getElementById("b_login").style.display = "none";

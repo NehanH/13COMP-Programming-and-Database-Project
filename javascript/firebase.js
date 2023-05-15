@@ -55,12 +55,12 @@ function fb_login(_dataRec) {
       var provider = new firebase.auth.GoogleAuthProvider();
       //firebase.auth().signInWithRedirect(provider); // Another method
       firebase.auth().signInWithPopup(provider).then(function(result) {
-        _dataRec.uid      = user.uid;
-        _dataRec.email    = user.email;
-        _dataRec.name     = user.displayName;
-        _dataRec.photoURL = user.photoURL;
-        _dataRec.gameName = user.gameName;
-        _dataRec.phone    = user.phone;
+        _dataRec.uid      = result.user.uid;
+        _dataRec.email    = result.user.email;
+        _dataRec.name     = result.user.displayName;
+        _dataRec.photoURL = result.user.photoURL;
+        _dataRec.gameName = result.user.gameName;
+        _dataRec.phone    = result.user.phone;
         loginStatus = 'logged in via popup';
         console.log('fb_login: status via popup= ' + loginStatus);
       })

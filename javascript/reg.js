@@ -46,7 +46,7 @@ function regEmailName(){
 function reg_checkUserRegister(){
   if(userDetails.gameName != null){
   ss_store("details", userDetails);
-  window.location.href = "https://13comp-programming-and-db-assessment-nehanhettiarach.13comp-gl-2023.repl.co/gp.html";
+  window.location.href = "/gp.html";
   }
 }
 /**************************************************************/
