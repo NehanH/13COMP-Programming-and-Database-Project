@@ -161,15 +161,29 @@ margin: auto;
 .rock:hover, .paper:hover, .scissors:hover {
     border: 4px dotted rgb(45, 96, 153);
     border-radius: 20px;
-    padding: 5px;
 }
 
+.rock, .paper, .scissors {
+  padding: 20px;
+}
+
+.frock, .fPaper, .fScissors {
+  padding: 20px;
+}
 
 .fake-choices1{
   display: none;
 }
 
 .fake-choices2{
+  display: none;
+}
+
+.choices1{
+  display: none;
+}
+
+.choices2{
   display: none;
 }
 

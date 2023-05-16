@@ -30,6 +30,7 @@ function createLobby() {
   document.getElementById("RPS").style.display = "block";
   document.getElementById("waitingForUser").style.display = "block";
   sessionStorage.setItem('currentGame', lobbyRef.key);
+  sessionStorage.setItem('playerNumber', 'player1');
 
   waitingScreen();
 }
@@ -41,7 +42,7 @@ function createLobby() {
 // Input:  n/a
 // Return: n/a
 /**************************************************************/
-function waitingScreen(){
+function waitingScreen() {
   const currentGame = sessionStorage.getItem('currentGame')
   console.log()
   const gameRef = firebase.database().ref('userLobbies/RPS/unActive/' + currentGame + '/p2UID');
@@ -52,6 +53,7 @@ function waitingScreen(){
       document.getElementById("waitingForUser").style.display = 'none';
     }
   });
+  RPSgame();
 }
 /**************************************************************/
 // refreshLobby()
@@ -60,7 +62,7 @@ function waitingScreen(){
 // Input:  n/a
 // Return: n/a
 /**************************************************************/
-function refreshLobby(){
+function refreshLobby() {
   const tableBody = document.getElementById("RPS_tableBody");
   tableBody.innerHTML = "";
 
@@ -140,4 +142,19 @@ function joinGame(p1UID, lobbyKey) {
     });
     firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).remove();
   });
+  sessionStorage.setItem('playerNumber', 'player2');
+  RPSgame();
+}
+
+function RPSgame() {
+  const userNumber = sessionStorage.getItem('playerNumber');
+      if (userNumber == 'player1') {
+      document.getElementById("choices1").style.display = "block";
+      document.getElementById("choices2").style.display = "none";
+      document.getElementById("fake-choices2").style.display = "block";
+    } else if (userNumber == 'player2') {
+      document.getElementById("choices1").style.display = "none";
+      document.getElementById("choices2").style.display = "block";
+      document.getElementById("fake-choices1").style.display = "block";
+    }
 }
