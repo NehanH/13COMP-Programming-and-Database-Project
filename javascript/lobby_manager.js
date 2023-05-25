@@ -217,5 +217,28 @@ const lobbyKey = sessionStorage.getItem('currentGame');
 document.getElementById("player2").innerHTML  = userDetails.gameName;
 }
 
-
+function p1ChoiceRock(){
+  document.getElementById("choices1").style.display = "None";
+  alert('player1 picks rock')
+}
+function p1ChoicePaper(){
+  document.getElementById("choices1").style.display = "None";
+  alert('player1 picks paper')
+}
+function p1ChoiceScissors(){
+  document.getElementById("choices1").style.display = "None";
+  alert('player1 picks scissors')
+}
+function p2ChoiceRock(){
+  document.getElementById("choices2").style.display = "None";
+  alert('player2 picks rock')
+}
+function p2ChoicePaper(){
+  document.getElementById("choices2").style.display = "None";
+  alert('player2 picks paper')
+}
+function p2ChoiceScissors(){
+  document.getElementById("choices2").style.display = "None";
+  alert('player2 picks scissors')
+}
 
