@@ -160,6 +160,13 @@ function joinGame(p1UID, lobbyKey) {
       p2NameDisplay();
     }
 
+/**************************************************************/
+// RPSGAME()
+// Called by waitingScreen() And joinGame()
+// Decides which player is player 1 and 2 and hides and shows appropriate game choices.
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function RPSgame() {
       const userNumber = sessionStorage.getItem('playerNumber');
       if (userNumber == 'player1') {
@@ -173,7 +180,13 @@ function RPSgame() {
       }
     }
 
-
+/**************************************************************/
+// p1NameDisplay()
+// Called by waitingScreen()
+// Displays p1 and p2 names for player 1 side.
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function p1NameDisplay(){
 const userDetails = JSON.parse(sessionStorage.getItem("details"));
 const lobbyKey = sessionStorage.getItem('currentGame');
@@ -181,11 +194,18 @@ const lobbyKey = sessionStorage.getItem('currentGame');
       p2NameRef.once('value', (snapshot) => {
         const data = snapshot.val();
         document.getElementById("player2").innerHTML  = data;  
+        console.log(data)
       });
 document.getElementById("player1").innerHTML  = userDetails.gameName;
 
 }
-
+/**************************************************************/
+// p2NameDisplay()
+// Called by joinGame()
+// Displays p1 and p2 names for player 2 side.
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function p2NameDisplay(){
 const userDetails = JSON.parse(sessionStorage.getItem("details"));
 const lobbyKey = sessionStorage.getItem('currentGame');
@@ -195,5 +215,7 @@ const lobbyKey = sessionStorage.getItem('currentGame');
         document.getElementById("player1").innerHTML  = data;
       });
 document.getElementById("player2").innerHTML  = userDetails.gameName;
-  
 }
+
+
+
