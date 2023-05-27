@@ -55,7 +55,7 @@ function waitingScreen() {
       p1NameDisplay();
     }
   });
-RPSgame();
+  RPSgame();
 }
 
 function p2NameSS() {
@@ -64,8 +64,8 @@ function p2NameSS() {
   p2NameRef.on('value', (snapshot) => {
     const data = snapshot.val();
     sessionStorage.setItem('p2Name', data);
-    });
-  }
+  });
+}
 
 
 /**************************************************************/
@@ -76,41 +76,41 @@ function p2NameSS() {
 // Return: n/a
 /**************************************************************/
 function refreshLobby() {
-      const tableBody = document.getElementById("RPS_tableBody");
-      tableBody.innerHTML = "";
+  const tableBody = document.getElementById("RPS_tableBody");
+  tableBody.innerHTML = "";
 
-      firebase.database().ref("userLobbies/RPS/unActive").once('value', (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-          const lobby = childSnapshot.val();
-          if (!lobby || !lobby.p1Name) {
-            return;
-          }
+  firebase.database().ref("userLobbies/RPS/unActive").once('value', (snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+      const lobby = childSnapshot.val();
+      if (!lobby || !lobby.p1Name) {
+        return;
+      }
 
-          const lobbyKey = childSnapshot.key;
-          const gameName = `${lobby.p1Name}'s game`;
-          const numPlayers = lobby.p2Name ? '2/2' : '1/2';
-          const joinButton = createJoinButton(lobby.p1UID, lobbyKey);
+      const lobbyKey = childSnapshot.key;
+      const gameName = `${lobby.p1Name}'s game`;
+      const numPlayers = lobby.p2Name ? '2/2' : '1/2';
+      const joinButton = createJoinButton(lobby.p1UID, lobbyKey);
 
-          // Add the lobby info and join button to the table
-          const row = tableBody.insertRow(-1);
-          const nameCell = row.insertCell(0);
-          const playersCell = row.insertCell(1);
-          const joinCell = row.insertCell(2);
-          nameCell.textContent = gameName;
-          playersCell.textContent = numPlayers;
-          joinCell.appendChild(joinButton);
+      // Add the lobby info and join button to the table
+      const row = tableBody.insertRow(-1);
+      const nameCell = row.insertCell(0);
+      const playersCell = row.insertCell(1);
+      const joinCell = row.insertCell(2);
+      nameCell.textContent = gameName;
+      playersCell.textContent = numPlayers;
+      joinCell.appendChild(joinButton);
 
-          // Add the lobby to the list of unactive lobbies
-          unactiveLobbies.push({
-            key: lobbyKey,
-            p1UID: lobby.p1UID,
-            p1Name: lobby.p1Name,
-            p2UID: lobby.p2UID,
-            p2Name: lobby.p2Name
-          });
-        });
+      // Add the lobby to the list of unactive lobbies
+      unactiveLobbies.push({
+        key: lobbyKey,
+        p1UID: lobby.p1UID,
+        p1Name: lobby.p1Name,
+        p2UID: lobby.p2UID,
+        p2Name: lobby.p2Name
       });
-    }
+    });
+  });
+}
 
 /**************************************************************/
 // createJoinButton(p1UID, LobbyKey)
@@ -120,12 +120,12 @@ function refreshLobby() {
 // Return: n/a
 /**************************************************************/
 function createJoinButton(p1UID, lobbyKey) {
-      const joinButton = document.createElement('button');
-      joinButton.type = 'button';
-      joinButton.textContent = 'Join';
-      joinButton.addEventListener('click', () => joinGame(p1UID, lobbyKey));
-      return joinButton;
-    }
+  const joinButton = document.createElement('button');
+  joinButton.type = 'button';
+  joinButton.textContent = 'Join';
+  joinButton.addEventListener('click', () => joinGame(p1UID, lobbyKey));
+  return joinButton;
+}
 
 /**************************************************************/
 // joinGame(_joinID)
@@ -135,30 +135,30 @@ function createJoinButton(p1UID, lobbyKey) {
 // Return: n/a
 /**************************************************************/
 function joinGame(p1UID, lobbyKey) {
-      var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
-      var player2Name = ss_userDetails.gameName;
-      var player2UID = ss_userDetails.uid;
+  var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
+  var player2Name = ss_userDetails.gameName;
+  var player2UID = ss_userDetails.uid;
 
-      document.getElementById("ls").style.display = "none";
-      document.getElementById("RPS").style.display = "block";
-      sessionStorage.setItem('currentGame', lobbyKey);
-      console.log(ss_userDetails.gameName);
-      console.log(ss_userDetails.uid);
-      firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).update({
-        p2Name: player2Name,
-        p2UID: player2UID,
-      })
-      firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).once('value', function(snapshot) {
-        var currentGame = snapshot.val();
-        firebase.database().ref('userLobbies/RPS/active/').update({
-          [lobbyKey]: currentGame
-        });
-        firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).remove();
-      });
-      sessionStorage.setItem('playerNumber', 'player2');
-      RPSgame();
-      p2NameDisplay();
-    }
+  document.getElementById("ls").style.display = "none";
+  document.getElementById("RPS").style.display = "block";
+  sessionStorage.setItem('currentGame', lobbyKey);
+  console.log(ss_userDetails.gameName);
+  console.log(ss_userDetails.uid);
+  firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).update({
+    p2Name: player2Name,
+    p2UID: player2UID,
+  })
+  firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).once('value', function(snapshot) {
+    var currentGame = snapshot.val();
+    firebase.database().ref('userLobbies/RPS/active/').update({
+      [lobbyKey]: currentGame
+    });
+    firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).remove();
+  });
+  sessionStorage.setItem('playerNumber', 'player2');
+  RPSgame();
+  p2NameDisplay();
+}
 
 /**************************************************************/
 // RPSGAME()
@@ -168,17 +168,17 @@ function joinGame(p1UID, lobbyKey) {
 // Return: n/a
 /**************************************************************/
 function RPSgame() {
-      const userNumber = sessionStorage.getItem('playerNumber');
-      if (userNumber == 'player1') {
-        document.getElementById("choices1").style.display = "block";
-        document.getElementById("choices2").style.display = "none";
-        document.getElementById("fake-choices2").style.display = "block";
-      } else if (userNumber == 'player2') {
-        document.getElementById("choices1").style.display = "none";
-        document.getElementById("choices2").style.display = "block";
-        document.getElementById("fake-choices1").style.display = "block";
-      }
-    }
+  const userNumber = sessionStorage.getItem('playerNumber');
+  if (userNumber == 'player1') {
+    document.getElementById("choices1").style.display = "block";
+    document.getElementById("choices2").style.display = "none";
+    document.getElementById("fake-choices2").style.display = "block";
+  } else if (userNumber == 'player2') {
+    document.getElementById("choices1").style.display = "none";
+    document.getElementById("choices2").style.display = "block";
+    document.getElementById("fake-choices1").style.display = "block";
+  }
+}
 
 /**************************************************************/
 // p1NameDisplay()
@@ -187,16 +187,16 @@ function RPSgame() {
 // Input:  n/a
 // Return: n/a
 /**************************************************************/
-function p1NameDisplay(){
-const userDetails = JSON.parse(sessionStorage.getItem("details"));
-const lobbyKey = sessionStorage.getItem('currentGame');
-      var p2NameRef = firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey + '/p2Name');
-      p2NameRef.once('value', (snapshot) => {
-        const data = snapshot.val();
-        document.getElementById("player2").innerHTML  = data;  
-        console.log(data)
-      });
-document.getElementById("player1").innerHTML  = userDetails.gameName;
+function p1NameDisplay() {
+  const userDetails = JSON.parse(sessionStorage.getItem("details"));
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  var p2NameRef = firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey + '/p2Name');
+  p2NameRef.once('value', (snapshot) => {
+    const data = snapshot.val();
+    document.getElementById("player2").innerHTML = data;
+    console.log(data)
+  });
+  document.getElementById("player1").innerHTML = userDetails.gameName;
 
 }
 /**************************************************************/
@@ -206,39 +206,90 @@ document.getElementById("player1").innerHTML  = userDetails.gameName;
 // Input:  n/a
 // Return: n/a
 /**************************************************************/
-function p2NameDisplay(){
-const userDetails = JSON.parse(sessionStorage.getItem("details"));
-const lobbyKey = sessionStorage.getItem('currentGame');
-      var p1NameRef = firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey + '/p1Name');
-      p1NameRef.once('value', (snapshot) => {
-        const data = snapshot.val();
-        document.getElementById("player1").innerHTML  = data;
-      });
-document.getElementById("player2").innerHTML  = userDetails.gameName;
+function p2NameDisplay() {
+  const userDetails = JSON.parse(sessionStorage.getItem("details"));
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  var p1NameRef = firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey + '/p1Name');
+  p1NameRef.once('value', (snapshot) => {
+    const data = snapshot.val();
+    document.getElementById("player1").innerHTML = data;
+  });
+  document.getElementById("player2").innerHTML = userDetails.gameName;
 }
 
-function p1ChoiceRock(){
+function p1ChoiceRock() {
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p1Pick: "Rock",
+  })
   document.getElementById("choices1").style.display = "None";
   alert('player1 picks rock')
-}
-function p1ChoicePaper(){
-  document.getElementById("choices1").style.display = "None";
-  alert('player1 picks paper')
-}
-function p1ChoiceScissors(){
-  document.getElementById("choices1").style.display = "None";
-  alert('player1 picks scissors')
-}
-function p2ChoiceRock(){
-  document.getElementById("choices2").style.display = "None";
-  alert('player2 picks rock')
-}
-function p2ChoicePaper(){
-  document.getElementById("choices2").style.display = "None";
-  alert('player2 picks paper')
-}
-function p2ChoiceScissors(){
-  document.getElementById("choices2").style.display = "None";
-  alert('player2 picks scissors')
+  checkPlayerMoves()
 }
 
+function p1ChoicePaper() {
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p1Pick: "Paper",
+  })
+  document.getElementById("choices1").style.display = "None";
+  alert('player1 picks paper')
+  checkPlayerMoves()
+}
+
+function p1ChoiceScissors() {
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p1Pick: "Scissors",
+  })
+  document.getElementById("choices1").style.display = "None";
+  alert('player1 picks scissors')
+  checkPlayerMoves()
+}
+
+function p2ChoiceRock() {
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p2Pick: "Rock",
+  })
+  document.getElementById("choices2").style.display = "None";
+  alert('player2 picks rock')
+  checkPlayerMoves()
+}
+
+function p2ChoicePaper() {
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p2Pick: "Paper",
+  })
+  document.getElementById("choices2").style.display = "None";
+  alert('player2 picks paper')
+  checkPlayerMoves()
+}
+
+function p2ChoiceScissors() {
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p2Pick: "Scissors",
+  })
+  document.getElementById("choices2").style.display = "None";
+  alert('player2 picks scissors')
+  checkPlayerMoves()
+}
+
+function checkPlayerMoves(){
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
+
+  lobbyRef.on('value', snapshot => {
+    const lobbyData = snapshot.val();
+    if (lobbyData){
+      const p1Pick = lobbyData.p1Pick;
+      const p2Pick = lobbyData.p2Pick;
+
+      if (p1Pick && p2Pick){
+        alert('both players have made their picks')
+      }
+    }
+  })
+}
