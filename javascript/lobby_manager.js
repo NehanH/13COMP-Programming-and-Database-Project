@@ -156,9 +156,6 @@ function joinGame(p1UID, lobbyKey) {
     firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).remove();
   });
   sessionStorage.setItem('playerNumber', 'player2');
-const lobbyKey = sessionStorage.getItem('currentGame');
-const activeLobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
-activeLobbyRef.onDisconnect().remove();
   RPSgame();
   p2NameDisplay();
 }
