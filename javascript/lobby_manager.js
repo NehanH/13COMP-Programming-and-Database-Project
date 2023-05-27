@@ -297,18 +297,153 @@ function checkPlayerMoves(){
 }
 
 function winnerCalc(player1, player2){
+  const userDetails = JSON.parse(sessionStorage.getItem("details"));
+  const playerNum = sessionStorage.getItem('playerNumber');
+  
   if (player1 === 'Rock' && player2 === 'Paper'){
     alert('p2 WIN')
+    if (playerNum == 'player2'){
+      const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
+      userWinsRef.once('value', (snapshot) => {
+        const currentWins = snapshot.val();
+        const newWins = currentWins + 1;
+
+        userWinsRef.set(newWins).then(() => {
+          alert('Wins updated successfully!')
+        })
+      })
+    }
+        if (playerNum == 'player1'){
+      const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
+      userLossRef.once('value', (snapshot) => {
+        const currentLosses = snapshot.val();
+        const newLosses = currentLosses + 1;
+
+        userLossRef.set(newLosses).then(() => {
+          alert('Losses updated successfully!')
+        })
+      })
+    }
   } else if (player1 === 'Paper' && player2 === 'Rock'){
     alert('p1 WIN')
+        if (playerNum == 'player1'){
+      const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
+      userWinsRef.once('value', (snapshot) => {
+        const currentWins = snapshot.val();
+        const newWins = currentWins + 1;
+
+        userWinsRef.set(newWins).then(() => {
+          alert('Wins updated successfully!')
+        })
+      })
+    }
+        if (playerNum == 'player2'){
+      const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
+      userLossRef.once('value', (snapshot) => {
+        const currentLosses = snapshot.val();
+        const newLosses = currentLosses + 1;
+
+        userLossRef.set(newLosses).then(() => {
+          alert('Losses updated successfully!')
+        })
+      })
+    }
   } else if (player1 === 'Rock' && player2 === 'Scissors'){
     alert('p1 WIN')
+        if (playerNum == 'player1'){
+      const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
+      userWinsRef.once('value', (snapshot) => {
+        const currentWins = snapshot.val();
+        const newWins = currentWins + 1;
+
+        userWinsRef.set(newWins).then(() => {
+          alert('Wins updated successfully!')
+        })
+      })
+    }
+        if (playerNum == 'player2'){
+      const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
+      userLossRef.once('value', (snapshot) => {
+        const currentLosses = snapshot.val();
+        const newLosses = currentLosses + 1;
+
+        userLossRef.set(newLosses).then(() => {
+          alert('Losses updated successfully!')
+        })
+      })
+    }
   } else if (player1 === 'Scissors' && player2 === 'Rock'){
     alert('p2 WIN')
+        if (playerNum == 'player2'){
+      const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
+      userWinsRef.once('value', (snapshot) => {
+        const currentWins = snapshot.val();
+        const newWins = currentWins + 1;
+
+        userWinsRef.set(newWins).then(() => {
+          alert('Wins updated successfully!')
+        })
+      })
+    }
+        if (playerNum == 'player1'){
+      const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
+      userLossRef.once('value', (snapshot) => {
+        const currentLosses = snapshot.val();
+        const newLosses = currentLosses + 1;
+
+        userLossRef.set(newLosses).then(() => {
+          alert('Losses updated successfully!')
+        })
+      })
+    }
   } else if (player1 === 'Paper' && player2 === 'Scissors'){
     alert('p2 WIN')
+        if (playerNum == 'player2'){
+      const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
+      userWinsRef.once('value', (snapshot) => {
+        const currentWins = snapshot.val();
+        const newWins = currentWins + 1;
+
+        userWinsRef.set(newWins).then(() => {
+          alert('Wins updated successfully!')
+        })
+      })
+    }
+        if (playerNum == 'player1'){
+      const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
+      userLossRef.once('value', (snapshot) => {
+        const currentLosses = snapshot.val();
+        const newLosses = currentLosses + 1;
+
+        userLossRef.set(newLosses).then(() => {
+          alert('Losses updated successfully!')
+        })
+      })
+    }
   } else if (player1 === 'Scissors' && player2 === 'Paper'){
     alert('p1 WIN')
+        if (playerNum == 'player1'){
+      const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
+      userWinsRef.once('value', (snapshot) => {
+        const currentWins = snapshot.val();
+        const newWins = currentWins + 1;
+
+        userWinsRef.set(newWins).then(() => {
+          alert('Wins updated successfully!')
+        })
+      })
+    }
+        if (playerNum == 'player2'){
+      const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
+      userLossRef.once('value', (snapshot) => {
+        const currentLosses = snapshot.val();
+        const newLosses = currentLosses + 1;
+
+        userLossRef.set(newLosses).then(() => {
+          alert('Losses updated successfully!')
+        })
+      })
+    }
   } else if (player1 === player2 ){
     alert('TIE')
   }

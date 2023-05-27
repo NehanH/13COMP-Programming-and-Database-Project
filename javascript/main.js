@@ -20,8 +20,8 @@ var userDetails = {
   email:    'n/a',
   name:     'n/a',
   photoURL: 'n/a',
-  win:      'n/a',
-  loss:     'n/a',
+  win:      0,
+  loss:     0,
   gameName: 'n/a',
   phone:    'n/a'
 };
