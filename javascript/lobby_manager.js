@@ -156,6 +156,9 @@ function joinGame(p1UID, lobbyKey) {
     firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).remove();
   });
   sessionStorage.setItem('playerNumber', 'player2');
+const lobbyKey = sessionStorage.getItem('currentGame');
+const activeLobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
+activeLobbyRef.onDisconnect().remove();
   RPSgame();
   p2NameDisplay();
 }
@@ -193,8 +196,8 @@ function p1NameDisplay() {
   var p2NameRef = firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey + '/p2Name');
   p2NameRef.once('value', (snapshot) => {
     const data = snapshot.val();
-    document.getElementById("player2").innerHTML = data;
     console.log(data)
+    document.getElementById("player2").innerHTML = data;
   });
   document.getElementById("player1").innerHTML = userDetails.gameName;
 
@@ -288,8 +291,29 @@ function checkPlayerMoves(){
       const p2Pick = lobbyData.p2Pick;
 
       if (p1Pick && p2Pick){
-        alert('both players have made their picks')
+        const message = 'Player 1 picks ' + p1Pick + ' Player 2 picks ' + p2Pick;
+        alert(message);
+        winnerCalc(p1Pick, p2Pick)
       }
     }
   })
 }
+
+function winnerCalc(player1, player2){
+  if (player1 === 'Rock' && player2 === 'Paper'){
+    alert('p2 WIN')
+  } else if (player1 === 'Paper' && player2 === 'Rock'){
+    alert('p1 WIN')
+  } else if (player1 === 'Rock' && player2 === 'Scissors'){
+    alert('p1 WIN')
+  } else if (player1 === 'Scissors' && player2 === 'Rock'){
+    alert('p2 WIN')
+  } else if (player1 === 'Paper' && player2 === 'Scissors'){
+    alert('p2 WIN')
+  } else if (player1 === 'Scissors' && player2 === 'Paper'){
+    alert('p1 WIN')
+  } else if (player1 === player2 ){
+    alert('TIE')
+  }
+}
+
