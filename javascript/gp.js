@@ -25,6 +25,7 @@ function saveSS(){
   element.innerHTML = "Logged In As:" + " " + ss_userDetails.gameName;
   var elementWL = document.getElementById("userWinLoss");
   elementWL.innerHTML = ss_userDetails.win + '/' + ss_userDetails.loss;
+  readAdminData();
 }
 /**************************************************************/
 // lobbyButton()
@@ -42,3 +43,31 @@ function fakeButton(){
   alert('This is just for show, pick Rock Paper Scissors To Play The Game!')
 }
 
+/*****************************************************/
+// readAdminData
+// Checks user for admin by looking for corresponding admin UID
+// Called by fb_login
+// Input:  n/a
+// Return:  n/a
+/*****************************************************/
+function readAdminData(){
+  var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
+  var adminRef = firebase.database().ref('admin/' + ss_userDetails.name);
+  adminRef.on('value', (snapshot) => {
+  var data = snapshot.val();
+    if(ss_userDetails.uid == data.isAdmin){
+      adminButtonDisplay()
+    }
+});
+}
+
+/*****************************************************/
+// AdminButtonDisplay Function
+// Shows admin button if user is admin
+// Called by readAdminData
+// Input:  n/a
+// Return:  n/a
+/*****************************************************/
+function adminButtonDisplay(){
+   document.getElementById("b_lpAdmin").style.display = "block";
+}

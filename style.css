@@ -196,5 +196,21 @@ margin: auto;
 .choices2{
   display: none;
 }
+/*------------------------------------------------------------*
+  ADMIN page & BUTTON styling
+/*------------------------------------------------------------*/
+#s_adminPage {
+  display: none;
+  height: 86vh;
+  overflow: scroll;
+}
+
+#b_lpAdmin {
+  display: none;   /* none = don't display element */
+}
+
+#b_gpAdmin {
+  display: none;   /* none = don't display element */
+}
 
 /*** End of CSS *********************************************************/
