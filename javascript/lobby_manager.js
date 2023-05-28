@@ -22,7 +22,9 @@ function createLobby() {
     p2Name: '',
     p1Pick: '',
     p2Pick: '',
-    win: ''
+    win: '',
+    p1Rematch: '',
+    p2Rematch: ''
   });
 
   // Display the waiting user screen
@@ -277,17 +279,17 @@ function p2ChoiceScissors() {
   checkPlayerMoves()
 }
 
-function checkPlayerMoves(){
+function checkPlayerMoves() {
   const lobbyKey = sessionStorage.getItem('currentGame');
   const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
 
   lobbyRef.on('value', snapshot => {
     const lobbyData = snapshot.val();
-    if (lobbyData){
+    if (lobbyData) {
       const p1Pick = lobbyData.p1Pick;
       const p2Pick = lobbyData.p2Pick;
 
-      if (p1Pick && p2Pick){
+      if (p1Pick && p2Pick) {
         const message = 'Player 1 picks ' + p1Pick + ' Player 2 picks ' + p2Pick;
         alert(message);
         winnerCalc(p1Pick, p2Pick)
@@ -296,13 +298,13 @@ function checkPlayerMoves(){
   })
 }
 
-function winnerCalc(player1, player2){
+function winnerCalc(player1, player2) {
   const userDetails = JSON.parse(sessionStorage.getItem("details"));
   const playerNum = sessionStorage.getItem('playerNumber');
-  
-  if (player1 === 'Rock' && player2 === 'Paper'){
+
+  if (player1 === 'Rock' && player2 === 'Paper') {
     alert('p2 WIN')
-    if (playerNum == 'player2'){
+    if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
         const currentWins = snapshot.val();
@@ -313,7 +315,7 @@ function winnerCalc(player1, player2){
         })
       })
     }
-        if (playerNum == 'player1'){
+    if (playerNum == 'player1') {
       const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
       userLossRef.once('value', (snapshot) => {
         const currentLosses = snapshot.val();
@@ -324,9 +326,10 @@ function winnerCalc(player1, player2){
         })
       })
     }
-  } else if (player1 === 'Paper' && player2 === 'Rock'){
+    showGameEndBtn()
+  } else if (player1 === 'Paper' && player2 === 'Rock') {
     alert('p1 WIN')
-        if (playerNum == 'player1'){
+    if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
         const currentWins = snapshot.val();
@@ -337,7 +340,7 @@ function winnerCalc(player1, player2){
         })
       })
     }
-        if (playerNum == 'player2'){
+    if (playerNum == 'player2') {
       const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
       userLossRef.once('value', (snapshot) => {
         const currentLosses = snapshot.val();
@@ -348,9 +351,10 @@ function winnerCalc(player1, player2){
         })
       })
     }
-  } else if (player1 === 'Rock' && player2 === 'Scissors'){
+    showGameEndBtn()
+  } else if (player1 === 'Rock' && player2 === 'Scissors') {
     alert('p1 WIN')
-        if (playerNum == 'player1'){
+    if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
         const currentWins = snapshot.val();
@@ -361,7 +365,7 @@ function winnerCalc(player1, player2){
         })
       })
     }
-        if (playerNum == 'player2'){
+    if (playerNum == 'player2') {
       const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
       userLossRef.once('value', (snapshot) => {
         const currentLosses = snapshot.val();
@@ -372,9 +376,10 @@ function winnerCalc(player1, player2){
         })
       })
     }
-  } else if (player1 === 'Scissors' && player2 === 'Rock'){
+    showGameEndBtn()
+  } else if (player1 === 'Scissors' && player2 === 'Rock') {
     alert('p2 WIN')
-        if (playerNum == 'player2'){
+    if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
         const currentWins = snapshot.val();
@@ -385,7 +390,7 @@ function winnerCalc(player1, player2){
         })
       })
     }
-        if (playerNum == 'player1'){
+    if (playerNum == 'player1') {
       const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
       userLossRef.once('value', (snapshot) => {
         const currentLosses = snapshot.val();
@@ -396,9 +401,10 @@ function winnerCalc(player1, player2){
         })
       })
     }
-  } else if (player1 === 'Paper' && player2 === 'Scissors'){
+    showGameEndBtn()
+  } else if (player1 === 'Paper' && player2 === 'Scissors') {
     alert('p2 WIN')
-        if (playerNum == 'player2'){
+    if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
         const currentWins = snapshot.val();
@@ -409,7 +415,7 @@ function winnerCalc(player1, player2){
         })
       })
     }
-        if (playerNum == 'player1'){
+    if (playerNum == 'player1') {
       const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
       userLossRef.once('value', (snapshot) => {
         const currentLosses = snapshot.val();
@@ -420,9 +426,10 @@ function winnerCalc(player1, player2){
         })
       })
     }
-  } else if (player1 === 'Scissors' && player2 === 'Paper'){
+    showGameEndBtn()
+  } else if (player1 === 'Scissors' && player2 === 'Paper') {
     alert('p1 WIN')
-        if (playerNum == 'player1'){
+    if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
         const currentWins = snapshot.val();
@@ -433,7 +440,7 @@ function winnerCalc(player1, player2){
         })
       })
     }
-        if (playerNum == 'player2'){
+    if (playerNum == 'player2') {
       const userLossRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'loss');
       userLossRef.once('value', (snapshot) => {
         const currentLosses = snapshot.val();
@@ -444,8 +451,73 @@ function winnerCalc(player1, player2){
         })
       })
     }
-  } else if (player1 === player2 ){
+    showGameEndBtn()
+  } else if (player1 === player2) {
     alert('TIE')
+    showGameEndBtn()
   }
 }
 
+function showGameEndBtn() {
+  document.getElementById("rematchBtn").style.display = "block";
+  document.getElementById("homeBtn").style.display = "block";
+}
+
+function gameRematch(){
+  clearMoves()
+  const userDetails = JSON.parse(sessionStorage.getItem("details"));
+  const playerNum = sessionStorage.getItem('playerNumber');
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  if(playerNum == 'player1') {
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p1Rematch: "Yes",
+  })
+  } else if (playerNum == 'player2'){
+    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p2Rematch: "Yes",
+  })
+  }
+  
+  const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
+  lobbyRef.on('value', snapshot => {
+    const lobbyData = snapshot.val();
+    if (lobbyData) {
+      const p1Pick = lobbyData.p1Rematch;
+      const p2Pick = lobbyData.p2Rematch;
+
+      if (p1Pick && p2Pick) {
+        const message = 'both players want a rematch'
+        alert(message);
+        runRematch();
+      }
+    }
+  })
+}
+
+function clearMoves(){
+  const playerNum = sessionStorage.getItem('playerNumber');
+  const lobbyKey = sessionStorage.getItem('currentGame');
+    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p1Pick: '',
+    p2Pick: '',
+  })
+  }
+
+function runRematch(){
+  const userDetails = JSON.parse(sessionStorage.getItem("details"));
+  const playerNum = sessionStorage.getItem('playerNumber');
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  if(playerNum == 'player1') {
+  document.getElementById("choices1").style.display = "block";
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p1Rematch: '',
+  })
+  } else if (playerNum == 'player2'){
+    document.getElementById("choices2").style.display = "block";
+    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p2Rematch: '',
+  })
+  }
+  document.getElementById("rematchBtn").style.display = "none";
+  document.getElementById("homeBtn").style.display = "none";
+}
