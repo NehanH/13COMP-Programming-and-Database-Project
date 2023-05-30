@@ -213,4 +213,9 @@ margin: auto;
   display: none;   /* none = don't display element */
 }
 
+#n_admin {
+  margin: auto;
+}
+
+
 /*** End of CSS *********************************************************/

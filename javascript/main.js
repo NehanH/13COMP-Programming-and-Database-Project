@@ -23,7 +23,7 @@ var userDetails = {
   win:      0,
   loss:     0,
   gameName: 'n/a',
-  phone:    'n/a'
+  phone:    'n/a',
 };
 
 // Setup function

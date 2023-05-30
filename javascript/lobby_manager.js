@@ -24,7 +24,9 @@ function createLobby() {
     p2Pick: '',
     win: '',
     p1Rematch: '',
-    p2Rematch: ''
+    p2Rematch: '',
+    p1Disconnect: '',
+    p2Disconnect: ''
   });
 
   // Display the waiting user screen
@@ -55,6 +57,8 @@ function waitingScreen() {
       p2NameSS();
       document.getElementById("waitingForUser").style.display = 'none';
       p1NameDisplay();
+      sessionStorage.setItem('Game', 'true');
+      runDisconnect();
     }
   });
   RPSgame();
@@ -158,8 +162,10 @@ function joinGame(p1UID, lobbyKey) {
     firebase.database().ref('userLobbies/RPS/unActive/' + lobbyKey).remove();
   });
   sessionStorage.setItem('playerNumber', 'player2');
+  sessionStorage.setItem('Game', 'true');
   RPSgame();
   p2NameDisplay();
+  runDisconnect();
 }
 
 /**************************************************************/
@@ -290,8 +296,6 @@ function checkPlayerMoves() {
       const p2Pick = lobbyData.p2Pick;
 
       if (p1Pick && p2Pick) {
-        const message = 'Player 1 picks ' + p1Pick + ' Player 2 picks ' + p2Pick;
-        alert(message);
         winnerCalc(p1Pick, p2Pick)
       }
     }
@@ -472,10 +476,12 @@ function gameRematch(){
   firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
     p1Rematch: "Yes",
   })
+  document.getElementById("rematchBtn").style.display = "none";
   } else if (playerNum == 'player2'){
     firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
     p2Rematch: "Yes",
   })
+   document.getElementById("rematchBtn").style.display = "none";
   }
   
   const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
@@ -520,4 +526,48 @@ function runRematch(){
   }
   document.getElementById("rematchBtn").style.display = "none";
   document.getElementById("homeBtn").style.display = "none";
+}
+
+function runDisconnect(){
+  const playerNum = sessionStorage.getItem('playerNumber');
+  const lobbyKey = sessionStorage.getItem('currentGame');
+  const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
+
+  
+  if (playerNum == 'player1'){
+  lobbyRef.onDisconnect().update({
+    p1Disconnect: 'true',
+  })
+  } else if (playerNum == 'player2'){
+      lobbyRef.onDisconnect().update({
+    p2Disconnect: 'true',
+  })
+  }
+  
+  if (playerNum == 'player1'){
+        const p2DCRef = lobbyRef.child('p2Disconnect')
+  p2DCRef.on('value', snapshot => {
+    const lobbyData = snapshot.val();
+    if (lobbyData) {
+      alert('p2 has disconnected returning to lobby select')
+      document.getElementById("RPS").style.display = "none";
+      document.getElementById("ls").style.display = "block";
+      lobbyRef.remove();
+      p2DCRef.off();
+    }
+  })
+  } else if (playerNum == 'player2'){
+  const p1DCRef = lobbyRef.child('p1Disconnect')
+  p1DCRef.on('value', snapshot => {
+    const lobbyData = snapshot.val();
+    if (lobbyData) {
+      alert('p1 has disconnected returning to lobby select')
+      document.getElementById("RPS").style.display = "none";
+      document.getElementById("ls").style.display = "block";
+      lobbyRef.remove();
+      p1DCRef.off();
+    }
+  })
+  }
+
 }

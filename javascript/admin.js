@@ -3,6 +3,10 @@
   
   Written by Mr Bob, Term 1 2020
   Tailored by Nehan Hettiarachchi, Term 2 2022
+  Tailored by Nehan Hettiarachchi, Term 2 2023
+
+  CODE COPIED FROM YEAR 12 COMP PROJECT
+  
   Develop a basic W3.CSS interface.
     v1 Basic layout of landing & game pages.
     v2 Landing/games pages full screen height but only display
