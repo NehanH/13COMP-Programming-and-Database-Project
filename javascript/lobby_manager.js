@@ -551,6 +551,8 @@ function runDisconnect(){
     if (lobbyData) {
       alert('p2 has disconnected returning to lobby select')
       document.getElementById("RPS").style.display = "none";
+      document.getElementById("homeBtn").style.display = "none";
+      document.getElementById("rematchBtn").style.display = "none";
       document.getElementById("ls").style.display = "block";
       lobbyRef.remove();
       lobbyRef.onDisconnect().cancel();
@@ -563,12 +565,34 @@ function runDisconnect(){
     if (lobbyData) {
       alert('p1 has disconnected returning to lobby select')
       document.getElementById("RPS").style.display = "none";
+      document.getElementById("homeBtn").style.display = "none";
+      document.getElementById("rematchBtn").style.display = "none";
       document.getElementById("ls").style.display = "block";
       lobbyRef.remove();
       lobbyRef.onDisconnect().cancel();
     }
   })
   }
+}
+
+function gameHomeBtn(){
+  clearMoves()
+  const playerNum = sessionStorage.getItem('playerNumber');
+  const lobbyKey = sessionStorage.getItem('currentGame');
+ document.getElementById("RPS").style.display = "none";
+ document.getElementById("ls").style.display = "block";
+document.getElementById("homeBtn").style.display = "none";
+document.getElementById("rematchBtn").style.display = "none";
+if(playerNum == 'player1') {
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p1Disconnect: "Yes",
+  })
+  document.getElementById("rematchBtn").style.display = "none";
+  } else if (playerNum == 'player2'){
+    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+    p2Disconnect: "Yes",
+  })
+}
 }
 
 function leaderboard(){
