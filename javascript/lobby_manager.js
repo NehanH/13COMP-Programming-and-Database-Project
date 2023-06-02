@@ -1,3 +1,7 @@
+/**************************************************************/
+// START OF PROGRAM
+/**************************************************************/
+
 // Array list of unactive lobbies
 const unactiveLobbies = [];
 
@@ -224,7 +228,13 @@ function p2NameDisplay() {
   });
   document.getElementById("player2").innerHTML = userDetails.gameName;
 }
-
+/**************************************************************/
+// Choice Functions
+// Called by Clicked a move
+// P1's and P2's Moves
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function p1ChoiceRock() {
   const lobbyKey = sessionStorage.getItem('currentGame');
   firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
@@ -284,7 +294,13 @@ function p2ChoiceScissors() {
   alert('player2 picks scissors')
   checkPlayerMoves()
 }
-
+/**************************************************************/
+// checkPlayerMoves()
+// Called by player move functions
+// checks if both players have made a move and if they have calculates winner
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function checkPlayerMoves() {
   const lobbyKey = sessionStorage.getItem('currentGame');
   const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
@@ -301,13 +317,21 @@ function checkPlayerMoves() {
     }
   })
 }
-
+/**************************************************************/
+// winnerCalc()
+// Called by checkPlayerMoves()
+// Calculates the winner / tie
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function winnerCalc(player1, player2) {
   const userDetails = JSON.parse(sessionStorage.getItem("details"));
   const playerNum = sessionStorage.getItem('playerNumber');
+  const winnerParagraph = document.getElementById('winnerParagraph');
 
   if (player1 === 'Rock' && player2 === 'Paper') {
     alert('p2 WIN')
+    winnerParagraph.textContent = 'Player 2 Wins!'
     if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -333,6 +357,7 @@ function winnerCalc(player1, player2) {
     showGameEndBtn()
   } else if (player1 === 'Paper' && player2 === 'Rock') {
     alert('p1 WIN')
+     winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -358,6 +383,7 @@ function winnerCalc(player1, player2) {
     showGameEndBtn()
   } else if (player1 === 'Rock' && player2 === 'Scissors') {
     alert('p1 WIN')
+    winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -383,6 +409,7 @@ function winnerCalc(player1, player2) {
     showGameEndBtn()
   } else if (player1 === 'Scissors' && player2 === 'Rock') {
     alert('p2 WIN')
+    winnerParagraph.textContent = 'Player 2 Wins!'
     if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -408,6 +435,7 @@ function winnerCalc(player1, player2) {
     showGameEndBtn()
   } else if (player1 === 'Paper' && player2 === 'Scissors') {
     alert('p2 WIN')
+     winnerParagraph.textContent = 'Player 2 Wins!'
     if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -433,6 +461,7 @@ function winnerCalc(player1, player2) {
     showGameEndBtn()
   } else if (player1 === 'Scissors' && player2 === 'Paper') {
     alert('p1 WIN')
+     winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -458,32 +487,45 @@ function winnerCalc(player1, player2) {
     showGameEndBtn()
   } else if (player1 === player2) {
     alert('TIE')
+     winnerParagraph.textContent = 'Draw!'
     showGameEndBtn()
   }
 }
-
+/**************************************************************/
+// showGameEndBtn()
+// Called by winnerCalc()
+// Shows rematch and home buttons
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
 function showGameEndBtn() {
   document.getElementById("rematchBtn").style.display = "block";
   document.getElementById("homeBtn").style.display = "block";
 }
-
-function gameRematch(){
+/**************************************************************/
+// gameRematch()
+// Called by rematch button
+// resets game board
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function gameRematch() {
   clearMoves()
   const userDetails = JSON.parse(sessionStorage.getItem("details"));
   const playerNum = sessionStorage.getItem('playerNumber');
   const lobbyKey = sessionStorage.getItem('currentGame');
-  if(playerNum == 'player1') {
-  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
-    p1Rematch: "Yes",
-  })
-  document.getElementById("rematchBtn").style.display = "none";
-  } else if (playerNum == 'player2'){
+  if (playerNum == 'player1') {
     firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
-    p2Rematch: "Yes",
-  })
-   document.getElementById("rematchBtn").style.display = "none";
+      p1Rematch: "Yes",
+    })
+    document.getElementById("rematchBtn").style.display = "none";
+  } else if (playerNum == 'player2') {
+    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+      p2Rematch: "Yes",
+    })
+    document.getElementById("rematchBtn").style.display = "none";
   }
-  
+
   const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
   lobbyRef.on('value', snapshot => {
     const lobbyData = snapshot.val();
@@ -499,113 +541,158 @@ function gameRematch(){
     }
   })
 }
-
-function clearMoves(){
+/**************************************************************/
+// clearMoves()
+// Called by gameRematch() and gameHomeBtn()
+// Clears database entries for player moves
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function clearMoves() {
   const playerNum = sessionStorage.getItem('playerNumber');
   const lobbyKey = sessionStorage.getItem('currentGame');
-    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
     p1Pick: '',
     p2Pick: '',
   })
-  }
-
-function runRematch(){
+}
+/**************************************************************/
+// runRematch()
+// Called by gameRematch()
+// Updates database with rematch entry
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function runRematch() {
   const userDetails = JSON.parse(sessionStorage.getItem("details"));
   const playerNum = sessionStorage.getItem('playerNumber');
   const lobbyKey = sessionStorage.getItem('currentGame');
-  if(playerNum == 'player1') {
-  document.getElementById("choices1").style.display = "block";
-  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
-    p1Rematch: '',
-  })
-  } else if (playerNum == 'player2'){
+  const winnerParagraph = document.getElementById('winnerParagraph');
+
+  if (playerNum == 'player1') {
+    document.getElementById("choices1").style.display = "block";
+    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+      p1Rematch: '',
+    })
+  } else if (playerNum == 'player2') {
     document.getElementById("choices2").style.display = "block";
     firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
-    p2Rematch: '',
-  })
+      p2Rematch: '',
+    })
   }
   document.getElementById("rematchBtn").style.display = "none";
   document.getElementById("homeBtn").style.display = "none";
+  winnerParagraph.textContent = ''
 }
-
-function runDisconnect(){
+/**************************************************************/
+// runDisconnect()
+// Called by joinGame() and waitingScreen()
+// checks for player disconnect
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function runDisconnect() {
   const playerNum = sessionStorage.getItem('playerNumber');
   const lobbyKey = sessionStorage.getItem('currentGame');
   const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
 
 
-  if (playerNum == 'player1' ){
-      lobbyRef.onDisconnect().update({
+  if (playerNum == 'player1') {
+    lobbyRef.onDisconnect().update({
       p1Disconnect: 'true',
     })
-  } else if (playerNum == 'player2'){
-      lobbyRef.onDisconnect().update({
+  } else if (playerNum == 'player2') {
+    lobbyRef.onDisconnect().update({
       p2Disconnect: 'true',
     })
   }
-  
-  if (playerNum == 'player1'){
-        const p2DCRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey + '/' + 'p2Disconnect')
-  p2DCRef.on('value', snapshot => {
-    const lobbyData = snapshot.val();
-    if (lobbyData) {
-      alert('p2 has disconnected returning to lobby select')
-      document.getElementById("RPS").style.display = "none";
-      document.getElementById("homeBtn").style.display = "none";
-      document.getElementById("rematchBtn").style.display = "none";
-      document.getElementById("ls").style.display = "block";
-      lobbyRef.remove();
-      lobbyRef.onDisconnect().cancel();
-    }
-  })
-  } else if (playerNum == 'player2'){
-  const p1DCRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey + '/' + 'p1Disconnect')
-  p1DCRef.on('value', snapshot => {
-    const lobbyData = snapshot.val();
-    if (lobbyData) {
-      alert('p1 has disconnected returning to lobby select')
-      document.getElementById("RPS").style.display = "none";
-      document.getElementById("homeBtn").style.display = "none";
-      document.getElementById("rematchBtn").style.display = "none";
-      document.getElementById("ls").style.display = "block";
-      lobbyRef.remove();
-      lobbyRef.onDisconnect().cancel();
-    }
-  })
+
+  if (playerNum == 'player1') {
+    const p2DCRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey + '/' + 'p2Disconnect')
+    p2DCRef.on('value', snapshot => {
+      const lobbyData = snapshot.val();
+      if (lobbyData) {
+        alert('p2 has disconnected returning to lobby select')
+        document.getElementById("RPS").style.display = "none";
+        document.getElementById("homeBtn").style.display = "none";
+        document.getElementById("rematchBtn").style.display = "none";
+        document.getElementById("ls").style.display = "block";
+        lobbyRef.remove();
+        lobbyRef.onDisconnect().cancel();
+      }
+    })
+  } else if (playerNum == 'player2') {
+    const p1DCRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey + '/' + 'p1Disconnect')
+    p1DCRef.on('value', snapshot => {
+      const lobbyData = snapshot.val();
+      if (lobbyData) {
+        alert('p1 has disconnected returning to lobby select')
+        document.getElementById("RPS").style.display = "none";
+        document.getElementById("homeBtn").style.display = "none";
+        document.getElementById("rematchBtn").style.display = "none";
+        document.getElementById("ls").style.display = "block";
+        lobbyRef.remove();
+        lobbyRef.onDisconnect().cancel();
+      }
+    })
   }
 }
-
-function gameHomeBtn(){
+/**************************************************************/
+// gameHomeBtn()
+// Called by home button
+// handles player going back to lobby screen
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function gameHomeBtn() {
   clearMoves()
   const playerNum = sessionStorage.getItem('playerNumber');
   const lobbyKey = sessionStorage.getItem('currentGame');
- document.getElementById("RPS").style.display = "none";
- document.getElementById("ls").style.display = "block";
-document.getElementById("homeBtn").style.display = "none";
-document.getElementById("rematchBtn").style.display = "none";
-if(playerNum == 'player1') {
-  firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
-    p1Disconnect: "Yes",
-  })
+  document.getElementById("RPS").style.display = "none";
+  document.getElementById("ls").style.display = "block";
+  document.getElementById("homeBtn").style.display = "none";
   document.getElementById("rematchBtn").style.display = "none";
-  } else if (playerNum == 'player2'){
+  if (playerNum == 'player1') {
     firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
-    p2Disconnect: "Yes",
-  })
+      p1Disconnect: "Yes",
+    })
+    document.getElementById("rematchBtn").style.display = "none";
+  } else if (playerNum == 'player2') {
+    firebase.database().ref('userLobbies/RPS/active/' + lobbyKey).update({
+      p2Disconnect: "Yes",
+    })
+  }
 }
+/**************************************************************/
+// leaderboard()
+// Called by keaderboard button
+// displays leaderboard
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function leaderboard() {
+  document.getElementById("ls").style.display = "none";
+  document.getElementById("lb").style.display = "block";
 }
-
-function leaderboard(){
-    document.getElementById("ls").style.display = "none";
-    document.getElementById("lb").style.display = "block";
+/**************************************************************/
+// backToRps()
+// Called by Back To Lobby button
+// hides leaderboard displays lobby
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function backToRps() {
+  document.getElementById("lb").style.display = "none";
+  document.getElementById("ls").style.display = "block";
 }
-
-function backToRps(){
-    document.getElementById("lb").style.display = "none";
-    document.getElementById("ls").style.display = "block";
-}
-
-function refreshLeaderboard(){
+/**************************************************************/
+// refreshLeaderboard()
+// Called by refresh leaderboard button
+// gets all info for table and updates table with top 5 players with most wins.
+// Input:  n/a
+// Return: n/a
+/**************************************************************/
+function refreshLeaderboard() {
   const leaderboardTable = document.getElementById("leaderboard");
   leaderboardTable.innerHTML = "";
 
@@ -643,8 +730,11 @@ function refreshLeaderboard(){
       row.appendChild(rankCell);
       row.appendChild(gameNameCell);
       row.appendChild(winCell);
-      
+
       leaderboardTable.appendChild(row);
     });
   });
 }
+/**************************************************************/
+// END OF PROGRAM
+/**************************************************************/

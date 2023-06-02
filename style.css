@@ -17,6 +17,12 @@ h1 {
   font-family: comfortaa;
 }
 
+p {
+  text-align: center;
+  font-size: 20px;
+  font-family: comfortaa;
+}
+
 /*** Landing page styling *********************************************************/
 #lp {
   display: block;
