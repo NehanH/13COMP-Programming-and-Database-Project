@@ -114,6 +114,10 @@ margin: auto;
   height: 95vh;
 }
 
+#lb{
+  display: none;
+}
+
 /*** Lobby select styling *********************************************************/
 
 .RPSLobby{

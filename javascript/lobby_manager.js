@@ -571,3 +571,63 @@ function runDisconnect(){
   }
 
 }
+
+function leaderboard(){
+    document.getElementById("ls").style.display = "none";
+    document.getElementById("lb").style.display = "block";
+}
+
+function backToRps(){
+    document.getElementById("lb").style.display = "none";
+    document.getElementById("ls").style.display = "block";
+}
+
+function refreshLeaderboard(){
+  const leaderboardTable = document.getElementById("leaderboard");
+  leaderboardTable.innerHTML = "";
+
+  const labelsRow = document.createElement('tr');
+  const rankLabel = document.createElement('th');
+  const nameLabel = document.createElement('th');
+  const gameNameLabel = document.createElement('th');
+  const winLabel = document.createElement('th');
+
+  rankLabel.textContent = "Rank";
+  nameLabel.textContent = "Name";
+  gameNameLabel.textContent = "Game Name";
+  winLabel.textContent = "Wins";
+
+  labelsRow.appendChild(rankLabel);
+  labelsRow.appendChild(nameLabel);
+  labelsRow.appendChild(gameNameLabel);
+  labelsRow.appendChild(winLabel);
+
+  leaderboardTable.appendChild(labelsRow)
+  firebase.database().ref("userDetails").orderByChild("win").limitToLast(5).once('value', (snapshot) => {
+    const users = [];
+    snapshot.forEach((childSnapshot) => {
+      const user = childSnapshot.val();
+      users.push(user);
+    });
+
+    users.reverse().forEach((user, index) => {
+      const row = document.createElement('tr');
+      const rankCell = document.createElement('td');
+      const nameCell = document.createElement('td');
+      const gameNameCell = document.createElement('td');
+      const winCell = document.createElement('td');
+
+      rankCell.textContent = index + 1;
+      nameCell.textContent = user.name;
+      gameNameCell.textContent = user.gameName;
+      winCell.textContent = user.win;
+
+      row.appendChild(rankCell);
+      row.appendChild(nameCell);
+      row.appendChild(gameNameCell);
+      row.appendChild(winCell);
+      
+      leaderboardTable.appendChild(row);
+    });
+  });
+}
