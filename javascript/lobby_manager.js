@@ -533,16 +533,18 @@ function runDisconnect(){
   const lobbyKey = sessionStorage.getItem('currentGame');
   const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
 
-  
-  if (playerNum == 'player1'){
-  lobbyRef.onDisconnect().update({
-    p1Disconnect: 'true',
+  lobbyRef.once('value', (snapshot) => {
+    const lobbyData = snapshot.val();
+    if (lobbyData && playerNum == 'player1'){
+        lobbyRef.onDisconnect().update({
+        p1Disconnect: 'true',
+      })
+    } else if (lobbyData && playerNum == 'player2'){
+            lobbyRef.onDisconnect().update({
+           p2Disconnect: 'true',
+  })    
+    }
   })
-  } else if (playerNum == 'player2'){
-      lobbyRef.onDisconnect().update({
-    p2Disconnect: 'true',
-  })
-  }
   
   if (playerNum == 'player1'){
         const p2DCRef = lobbyRef.child('p2Disconnect')
@@ -553,7 +555,6 @@ function runDisconnect(){
       document.getElementById("RPS").style.display = "none";
       document.getElementById("ls").style.display = "block";
       lobbyRef.remove();
-      p2DCRef.off();
     }
   })
   } else if (playerNum == 'player2'){
@@ -565,7 +566,6 @@ function runDisconnect(){
       document.getElementById("RPS").style.display = "none";
       document.getElementById("ls").style.display = "block";
       lobbyRef.remove();
-      p1DCRef.off();
     }
   })
   }
