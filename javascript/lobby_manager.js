@@ -533,45 +533,42 @@ function runDisconnect(){
   const lobbyKey = sessionStorage.getItem('currentGame');
   const lobbyRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey)
 
-  lobbyRef.once('value', (snapshot) => {
-    const lobbyData = snapshot.val();
-    if (lobbyData && playerNum == 'player1'){
-        lobbyRef.onDisconnect().update({
-        p1Disconnect: 'true',
-          
-      })
-      lobbyRef.remove();
-    } else if (lobbyData && playerNum == 'player2'){
-            lobbyRef.onDisconnect().update({
-           p2Disconnect: 'true',
-  })  
-    lobbyRef.remove();
-    }
-  })
+
+  if (playerNum == 'player1' ){
+      lobbyRef.onDisconnect().update({
+      p1Disconnect: 'true',
+    })
+  } else if (playerNum == 'player2'){
+      lobbyRef.onDisconnect().update({
+      p2Disconnect: 'true',
+    })
+  }
   
   if (playerNum == 'player1'){
-        const p2DCRef = lobbyRef.child('p2Disconnect')
+        const p2DCRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey + '/' + 'p2Disconnect')
   p2DCRef.on('value', snapshot => {
     const lobbyData = snapshot.val();
     if (lobbyData) {
       alert('p2 has disconnected returning to lobby select')
       document.getElementById("RPS").style.display = "none";
       document.getElementById("ls").style.display = "block";
-      
+      lobbyRef.remove();
+      lobbyRef.onDisconnect().cancel();
     }
   })
   } else if (playerNum == 'player2'){
-  const p1DCRef = lobbyRef.child('p1Disconnect')
+  const p1DCRef = firebase.database().ref('userLobbies/RPS/active/' + lobbyKey + '/' + 'p1Disconnect')
   p1DCRef.on('value', snapshot => {
     const lobbyData = snapshot.val();
     if (lobbyData) {
       alert('p1 has disconnected returning to lobby select')
       document.getElementById("RPS").style.display = "none";
       document.getElementById("ls").style.display = "block";
+      lobbyRef.remove();
+      lobbyRef.onDisconnect().cancel();
     }
   })
   }
-
 }
 
 function leaderboard(){
