@@ -538,11 +538,14 @@ function runDisconnect(){
     if (lobbyData && playerNum == 'player1'){
         lobbyRef.onDisconnect().update({
         p1Disconnect: 'true',
+          
       })
+      lobbyRef.remove();
     } else if (lobbyData && playerNum == 'player2'){
             lobbyRef.onDisconnect().update({
            p2Disconnect: 'true',
-  })    
+  })  
+    lobbyRef.remove();
     }
   })
   
@@ -554,7 +557,7 @@ function runDisconnect(){
       alert('p2 has disconnected returning to lobby select')
       document.getElementById("RPS").style.display = "none";
       document.getElementById("ls").style.display = "block";
-      lobbyRef.remove();
+      
     }
   })
   } else if (playerNum == 'player2'){
@@ -565,7 +568,6 @@ function runDisconnect(){
       alert('p1 has disconnected returning to lobby select')
       document.getElementById("RPS").style.display = "none";
       document.getElementById("ls").style.display = "block";
-      lobbyRef.remove();
     }
   })
   }
