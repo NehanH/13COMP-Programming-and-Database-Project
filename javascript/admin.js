@@ -141,6 +141,11 @@ function ad_processUSERReadAll(_result, _dbRec) {
         phone:        childData.phone,
         win:          childData.win,
         loss:         childData.loss,
+        address:         childData.address,
+        city:         childData.city,
+        country:         childData.country,
+        age:         childData.age,
+        gender:         childData.gender,
         uid:          childKey
       });
     });
@@ -153,7 +158,7 @@ function ad_processUSERReadAll(_result, _dbRec) {
     //  7 = COLUMMN NUMBER WHICH CONTAINS THE DATABASE KEY.              //<=======
     //  8 = DATABASE PATH THE RECORDS WERE READ FROM.                    //<=======
     ad_displayAll("t_userData", ad_adminArray, true,                     
-      "ls", "gp", "s_adminPage", 7, DETAILS);        //<=======
+      "ls", "gp", "s_adminPage", 12, DETAILS);        //<=======
     console.log('this is working')
   }
 }

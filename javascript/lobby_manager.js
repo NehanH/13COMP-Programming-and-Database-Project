@@ -588,17 +588,14 @@ function refreshLeaderboard(){
 
   const labelsRow = document.createElement('tr');
   const rankLabel = document.createElement('th');
-  const nameLabel = document.createElement('th');
   const gameNameLabel = document.createElement('th');
   const winLabel = document.createElement('th');
 
   rankLabel.textContent = "Rank";
-  nameLabel.textContent = "Name";
   gameNameLabel.textContent = "Game Name";
   winLabel.textContent = "Wins";
 
   labelsRow.appendChild(rankLabel);
-  labelsRow.appendChild(nameLabel);
   labelsRow.appendChild(gameNameLabel);
   labelsRow.appendChild(winLabel);
 
@@ -613,17 +610,14 @@ function refreshLeaderboard(){
     users.reverse().forEach((user, index) => {
       const row = document.createElement('tr');
       const rankCell = document.createElement('td');
-      const nameCell = document.createElement('td');
       const gameNameCell = document.createElement('td');
       const winCell = document.createElement('td');
 
       rankCell.textContent = index + 1;
-      nameCell.textContent = user.name;
       gameNameCell.textContent = user.gameName;
       winCell.textContent = user.win;
 
       row.appendChild(rankCell);
-      row.appendChild(nameCell);
       row.appendChild(gameNameCell);
       row.appendChild(winCell);
       

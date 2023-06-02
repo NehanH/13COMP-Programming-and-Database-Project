@@ -63,6 +63,11 @@ function reg_regDetailsEntered() {
   //    its currently details                                           //<======= 
   userDetails.gameName     =        reg_getFormItemValue("f_reg", 0);       //<=======
   userDetails.phone        = Number(reg_getFormItemValue("f_reg", 1));      //<=======
+  userDetails.address        = reg_getFormItemValue("f_reg", 2);  
+  userDetails.city       = reg_getFormItemValue("f_reg", 3);  
+  userDetails.country      = reg_getFormItemValue("f_reg", 4);  
+  userDetails.gender     = reg_getFormItemValue("f_reg", 5);  
+  userDetails.age        = Number(reg_getFormItemValue("f_reg", 6)); 
   
   console.log("reg_regDetailsEntered: form passed html validation - " +
             document.getElementById('f_reg').checkValidity()); 
