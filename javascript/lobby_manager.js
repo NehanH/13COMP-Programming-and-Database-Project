@@ -330,7 +330,6 @@ function winnerCalc(player1, player2) {
   const winnerParagraph = document.getElementById('winnerParagraph');
 
   if (player1 === 'Rock' && player2 === 'Paper') {
-    alert('p2 WIN')
     winnerParagraph.textContent = 'Player 2 Wins!'
     if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
@@ -339,7 +338,6 @@ function winnerCalc(player1, player2) {
         const newWins = currentWins + 1;
 
         userWinsRef.set(newWins).then(() => {
-          alert('Wins updated successfully!')
         })
       })
     }
@@ -350,13 +348,11 @@ function winnerCalc(player1, player2) {
         const newLosses = currentLosses + 1;
 
         userLossRef.set(newLosses).then(() => {
-          alert('Losses updated successfully!')
         })
       })
     }
     showGameEndBtn()
   } else if (player1 === 'Paper' && player2 === 'Rock') {
-    alert('p1 WIN')
      winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
@@ -365,7 +361,6 @@ function winnerCalc(player1, player2) {
         const newWins = currentWins + 1;
 
         userWinsRef.set(newWins).then(() => {
-          alert('Wins updated successfully!')
         })
       })
     }
@@ -376,13 +371,11 @@ function winnerCalc(player1, player2) {
         const newLosses = currentLosses + 1;
 
         userLossRef.set(newLosses).then(() => {
-          alert('Losses updated successfully!')
         })
       })
     }
     showGameEndBtn()
   } else if (player1 === 'Rock' && player2 === 'Scissors') {
-    alert('p1 WIN')
     winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
@@ -391,7 +384,6 @@ function winnerCalc(player1, player2) {
         const newWins = currentWins + 1;
 
         userWinsRef.set(newWins).then(() => {
-          alert('Wins updated successfully!')
         })
       })
     }
@@ -402,13 +394,11 @@ function winnerCalc(player1, player2) {
         const newLosses = currentLosses + 1;
 
         userLossRef.set(newLosses).then(() => {
-          alert('Losses updated successfully!')
         })
       })
     }
     showGameEndBtn()
   } else if (player1 === 'Scissors' && player2 === 'Rock') {
-    alert('p2 WIN')
     winnerParagraph.textContent = 'Player 2 Wins!'
     if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
@@ -417,7 +407,6 @@ function winnerCalc(player1, player2) {
         const newWins = currentWins + 1;
 
         userWinsRef.set(newWins).then(() => {
-          alert('Wins updated successfully!')
         })
       })
     }
@@ -428,13 +417,11 @@ function winnerCalc(player1, player2) {
         const newLosses = currentLosses + 1;
 
         userLossRef.set(newLosses).then(() => {
-          alert('Losses updated successfully!')
         })
       })
     }
     showGameEndBtn()
   } else if (player1 === 'Paper' && player2 === 'Scissors') {
-    alert('p2 WIN')
      winnerParagraph.textContent = 'Player 2 Wins!'
     if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
@@ -443,7 +430,6 @@ function winnerCalc(player1, player2) {
         const newWins = currentWins + 1;
 
         userWinsRef.set(newWins).then(() => {
-          alert('Wins updated successfully!')
         })
       })
     }
@@ -454,13 +440,11 @@ function winnerCalc(player1, player2) {
         const newLosses = currentLosses + 1;
 
         userLossRef.set(newLosses).then(() => {
-          alert('Losses updated successfully!')
         })
       })
     }
     showGameEndBtn()
   } else if (player1 === 'Scissors' && player2 === 'Paper') {
-    alert('p1 WIN')
      winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
@@ -469,7 +453,6 @@ function winnerCalc(player1, player2) {
         const newWins = currentWins + 1;
 
         userWinsRef.set(newWins).then(() => {
-          alert('Wins updated successfully!')
         })
       })
     }
@@ -480,13 +463,11 @@ function winnerCalc(player1, player2) {
         const newLosses = currentLosses + 1;
 
         userLossRef.set(newLosses).then(() => {
-          alert('Losses updated successfully!')
         })
       })
     }
     showGameEndBtn()
   } else if (player1 === player2) {
-    alert('TIE')
      winnerParagraph.textContent = 'Draw!'
     showGameEndBtn()
   }

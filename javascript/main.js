@@ -1,5 +1,5 @@
 /*************************************************************
-  firebase.js
+  loginManager.js
   
   Written by Nehan Hettiarachchi, Term 1 2023
   Javascript for index.html, has userDetails object, login function which checks if the user exists in the database, setup + draw     functions, ss_store() which saves the userDetails object to session storage.
