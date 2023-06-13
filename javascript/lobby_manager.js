@@ -600,6 +600,7 @@ function runDisconnect() {
         document.getElementById("ls").style.display = "block";
         lobbyRef.remove();
         lobbyRef.onDisconnect().cancel();
+        refreshLobby()
       }
     })
   } else if (playerNum == 'player2') {
@@ -614,6 +615,7 @@ function runDisconnect() {
         document.getElementById("ls").style.display = "block";
         lobbyRef.remove();
         lobbyRef.onDisconnect().cancel();
+        refreshLobby()
       }
     })
   }

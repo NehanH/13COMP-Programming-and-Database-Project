@@ -24,7 +24,7 @@ function saveSS(){
   var element = document.getElementById("userName");
   element.innerHTML = "Logged In As:" + " " + ss_userDetails.gameName;
   var elementWL = document.getElementById("userWinLoss");
-  elementWL.innerHTML = ss_userDetails.win + '/' + ss_userDetails.loss;
+  elementWL.innerHTML = "Win/Loss: " + ss_userDetails.win + '/' + ss_userDetails.loss;
   readAdminData();
 }
 /**************************************************************/
