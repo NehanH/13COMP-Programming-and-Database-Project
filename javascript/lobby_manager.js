@@ -107,7 +107,9 @@ function refreshLobby() {
       const playersCell = row.insertCell(1);
       const joinCell = row.insertCell(2);
       nameCell.textContent = gameName;
+      nameCell.classList = "comfortaaFont";
       playersCell.textContent = numPlayers;
+      playersCell.classList = "comfortaaFont";
       joinCell.appendChild(joinButton);
 
       // Add the lobby to the list of unactive lobbies
@@ -133,6 +135,7 @@ function createJoinButton(p1UID, lobbyKey) {
   const joinButton = document.createElement('button');
   joinButton.type = 'button';
   joinButton.textContent = 'Join';
+  joinButton.classList = "button w3-button w3-white w3-round-xxlarge";
   joinButton.addEventListener('click', () => joinGame(p1UID, lobbyKey));
   return joinButton;
 }
@@ -685,8 +688,11 @@ function refreshLeaderboard() {
   const winLabel = document.createElement('th');
 
   rankLabel.textContent = "Rank";
+  rankLabel.classList = "comfortaaFont";
   gameNameLabel.textContent = "Game Name";
+  gameNameLabel.classList = "comfortaaFont";
   winLabel.textContent = "Wins";
+  winLabel.classList = "comfortaaFont";
 
   labelsRow.appendChild(rankLabel);
   labelsRow.appendChild(gameNameLabel);
@@ -707,8 +713,11 @@ function refreshLeaderboard() {
       const winCell = document.createElement('td');
 
       rankCell.textContent = index + 1;
+      rankCell.classList = "comfortaaFont";
       gameNameCell.textContent = user.gameName;
+      gameNameCell.classList = "comfortaaFont";
       winCell.textContent = user.win;
+      winCell.classList = "comfortaaFont";
 
       row.appendChild(rankCell);
       row.appendChild(gameNameCell);

@@ -74,24 +74,25 @@
     </button>
     <div class="gp_buttons w3-center w3-container">
       <h1 id="gp_title"class="w3-animate-opacity w3-center w3-wide">Game Selection</h1>
-      <button  class="button1" onclick="fakeButton()">Tic Tac Toe</button>
-      <button id="speedButton" class="button1" onclick="lobbyButton()">Rock Paper Scissors</button>
-      <button  class="button1" onclick="fakeButton()">Space Invaders</button>
+      <button  class="button1 button w3-button w3-white w3-round-xxlarge" onclick="fakeButton()">Tic Tac Toe</button>
+      <button id="speedButton" class="button1 button w3-button w3-white w3-round-xxlarge" onclick="lobbyButton()">Rock Paper Scissors</button>
+      <button  class="button1 button w3-button w3-white w3-round-xxlarge" onclick="fakeButton()">Space Invaders</button>
     </div>
   </section>
 <!-- Lobbies Section *************************************************-->
   <section id="ls">
     <div id="lobbyContainer" class="w3-center w3-display-bottommiddle">
-      <button onclick="createLobby()" class="button1">Create</button>
-      <button onclick="refreshLobby()" class="button1">Refresh</button>
-      <button onclick="leaderboard()" class="button1">Leaderboard</button>
+      <button onclick="createLobby()" class="button1 button w3-button w3-white w3-round-xxlarge">Create</button>
+      <button onclick="refreshLobby()"class="button1 button w3-button w3-white w3-round-xxlarge">Refresh</button>
+      <button onclick="leaderboard()" class="button1 button w3-button w3-white w3-round-xxlarge">Leaderboard</button>
     </div>
+    <h1 id="ls_title"class="w3-animate-opacity w3-center w3-wide">Game Lobbies</h1>
   <div id="RPS_gameLobby">
     <table class="RPSLobby w3-table w3-display-middle w3-bordered">
       <thead>
         <tr>
-          <th class="lobbyName">Game<th>
-            <th>Players</th>
+          <th class="lobbyName comfortaaFont">Game<th>
+            <th class="comfortaaFont">Players</th>
         </tr>
       </thead>
       <tbody id="RPS_tableBody"></tbody>
@@ -109,10 +110,11 @@
 
   <!-- Leaderboard Section *************************************************-->
   <section id="lb">
+    <h1 id="ls_title"class="w3-animate-opacity w3-center w3-wide">Leaderboard</h1>
     <table class="w3-table w3-display-middle w3-bordered" id="leaderboard"></table>
     <div id="lobbyContainer" class="w3-center w3-display-bottommiddle">
-      <button onclick="backToRps()" id="backToLobby_Btn" class="button1">Back To Lobbies</button>
-      <button onclick="refreshLeaderboard()" class="button1">Refresh Leaderboard</button>
+      <button onclick="backToRps()" id="backToLobby_Btn" class="button1 button w3-button w3-white w3-round-xxlarge">Back To Lobbies</button>
+      <button onclick="refreshLeaderboard()" class="button1 button w3-button w3-white w3-round-xxlarge">Refresh Leaderboard</button>
     </div>
   </section>
 <!-- Rock Paper Scissors Game *************************************************-->
