@@ -27,13 +27,13 @@
     6. Download this project to your computer, extract all the          //<=======
          files from the zipped folder.                                  //<=======
     7. Upload all the images to you projects images folder.             //<=======
-*************************************************************/      
-  // These two lines need to be executed only after the                 //<=======
-  //  registration page is displayed                                    //<=======
-  // Save name & email into the form
-  // ENSURE THE OBJECT NAME IS CORRECT; its currently details           //<======= 
-function regEmailName(){
-  document.getElementById("p_regName").innerHTML  = userDetails.name        //<=======    
+*************************************************************/
+// These two lines need to be executed only after the                 //<=======
+//  registration page is displayed                                    //<=======
+// Save name & email into the form
+// ENSURE THE OBJECT NAME IS CORRECT; its currently details           //<======= 
+function regEmailName() {
+  document.getElementById("p_regName").innerHTML = userDetails.name        //<=======    
   document.getElementById("p_regEmail").innerHTML = userDetails.email       //<=======
 }
 /**************************************************************/
@@ -43,10 +43,10 @@ function regEmailName(){
 // Input:   
 // Return:
 /**************************************************************/
-function reg_checkUserRegister(){
-  if(userDetails.gameName != null){
-  ss_store("details", userDetails);
-  window.location.href = "/gp.html";
+function reg_checkUserRegister() {
+  if (userDetails.gameName != null) {
+    ss_store("details", userDetails);
+    window.location.href = "/gp.html";
   }
 }
 /**************************************************************/
@@ -57,20 +57,20 @@ function reg_checkUserRegister(){
 // Return:
 /**************************************************************/
 function reg_regDetailsEntered() {
-  console.log('reg_regDetailsEntered'); 
+  console.log('reg_regDetailsEntered');
   // Save player1's details from the form into your details object
   //  ENSURE THE OBJECT NAME THE PROGRAM SAVES TO IS CORRECT; 
   //    its currently details                                           //<======= 
-  userDetails.gameName     =        reg_getFormItemValue("f_reg", 0);       //<=======
-  userDetails.phone        = Number(reg_getFormItemValue("f_reg", 1));      //<=======
-  userDetails.address        = reg_getFormItemValue("f_reg", 2);  
-  userDetails.city       = reg_getFormItemValue("f_reg", 3);  
-  userDetails.country      = reg_getFormItemValue("f_reg", 4);  
-  userDetails.gender     = reg_getFormItemValue("f_reg", 5);  
-  userDetails.age        = Number(reg_getFormItemValue("f_reg", 6)); 
-  
+  userDetails.gameName = reg_getFormItemValue("f_reg", 0);       //<=======
+  userDetails.phone = Number(reg_getFormItemValue("f_reg", 1));      //<=======
+  userDetails.address = reg_getFormItemValue("f_reg", 2);
+  userDetails.city = reg_getFormItemValue("f_reg", 3);
+  userDetails.country = reg_getFormItemValue("f_reg", 4);
+  userDetails.gender = reg_getFormItemValue("f_reg", 5);
+  userDetails.age = Number(reg_getFormItemValue("f_reg", 6));
+
   console.log("reg_regDetailsEntered: form passed html validation - " +
-            document.getElementById('f_reg').checkValidity()); 
+    document.getElementById('f_reg').checkValidity());
 
   // Only write record to DB if all the form's input passed html validation
   if (document.getElementById('f_reg').checkValidity()) {
@@ -90,7 +90,7 @@ function reg_regDetailsEntered() {
 function reg_getFormItemValue(_elementId, _item) {
   //console.log('reg_getFormItemValue: _elementId=' + _elementId +
   //	  ',  _item= ' + _item);
-    
+
   return document.getElementById(_elementId).elements.item(_item).value;
 }
 

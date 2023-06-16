@@ -37,7 +37,7 @@
          copy the contents of this file into it.                         //<=======
     4. Taylor your ad_manger.js to fit your program code by looking      //<=======
          at lines ending with  //<=======                                //<=======
-*************************************************************/   
+*************************************************************/
 /**/
 
 /************************************************************* */
@@ -52,9 +52,9 @@ function ad_admin() {
   console.log('ad_admin is working')
   // Display the ADMIN screen
   // ENSURE THE HTML ID ARE CORRECT                                      //<=======
-  gp.style.display    = "none";                                  //<=======                                //<=======
-  s_adminPage.style.display   = "block";                                 //<=======
-  
+  gp.style.display = "none";                                  //<=======                                //<=======
+  s_adminPage.style.display = "block";                                 //<=======
+
   ad_user();
 }
 
@@ -70,10 +70,10 @@ function ad_home() {
 
   // Display the HOME (landing page) screen
   // ENSURE THE HTML ID ARE CORRECT                                      //<=======
-  gp.style.display    = "block";                                  //<=======
-  s_adminPage.style.display   = "none";                                  //<=======
+  gp.style.display = "block";                                  //<=======
+  s_adminPage.style.display = "none";                                  //<=======
   lp.style.display = "none";                                 //<=======
-   document.getElementById("b_login").style.display = "none";
+  document.getElementById("b_login").style.display = "none";
 }
 
 /**************************************************************/
@@ -101,9 +101,9 @@ function ad_user() {
 /**************************************************************/
 function ad_BB() {
   console.log('ad_BB: ');
-  
+
   document.getElementById("b_adUser").style.backgroundColor = "grey";
-  document.getElementById("b_adHome").style.backgroundColor = "grey"; 
+  document.getElementById("b_adHome").style.backgroundColor = "grey";
   // ENSURE THE READ FUNCTION NAME & THE PATH NAME ARE CORRECT           //<=======
   fb_readAll(DETAILS, ad_processUSERReadAll);                                   //<=======
 }
@@ -124,7 +124,7 @@ function ad_processUSERReadAll(_result, _dbRec) {
   var ad_adminArray = [];
 
   // Note: if read was successful, 1st input parameter must = "OK"       //<=======
-  if (_result != null) {            
+  if (_result != null) {
     console.log('ad_process is working')
     _dbRec.forEach(function(childSnapshot) {
       childKey = childSnapshot.key;
@@ -133,20 +133,20 @@ function ad_processUSERReadAll(_result, _dbRec) {
       // ENSURE THE FEILDS YOU PUSH INTO THE ARRAY OF OBJECTS            //<=======
       //  MATCH YOUR FIREBASE RECORDS FOR THE PATH                       //<=======
       ad_adminArray.push({
-        name:         childData.name,
-	      email:        childData.email,
+        name: childData.name,
+        email: childData.email,
         // Left photoURL out as its so long the table will be too wide for the screen
         //photoURL:   childData.photoURL,  
-        gameName:     childData.gameName,
-        phone:        childData.phone,
-        win:          childData.win,
-        loss:         childData.loss,
-        address:         childData.address,
-        city:         childData.city,
-        country:         childData.country,
-        age:         childData.age,
-        gender:         childData.gender,
-        uid:          childKey
+        gameName: childData.gameName,
+        phone: childData.phone,
+        win: childData.win,
+        loss: childData.loss,
+        address: childData.address,
+        city: childData.city,
+        country: childData.country,
+        age: childData.age,
+        gender: childData.gender,
+        uid: childKey
       });
     });
 
@@ -157,7 +157,7 @@ function ad_processUSERReadAll(_result, _dbRec) {
     //  6 = HTML ID OF DIV TO SHOW OR LEAVE EMPTY                        //<=======
     //  7 = COLUMMN NUMBER WHICH CONTAINS THE DATABASE KEY.              //<=======
     //  8 = DATABASE PATH THE RECORDS WERE READ FROM.                    //<=======
-    ad_displayAll("t_userData", ad_adminArray, true,                     
+    ad_displayAll("t_userData", ad_adminArray, true,
       "ls", "gp", "s_adminPage", 12, DETAILS);        //<=======
     console.log('this is working')
   }
@@ -187,8 +187,8 @@ function ad_processBBReadAll(_result, _dbRec) {
 
       // ENSURE THE FEILDS YOU PUSH INTO THE ARRAY OF OBJECTS            //<=======
       //  MATCH YOUR FIREBASE RECORDS FOR THE PATH                       //<=======
-      ad_adminArray.push({     
-        uid:  childKey,
+      ad_adminArray.push({
+        uid: childKey,
         score: childData.score,
       });
     });
@@ -197,11 +197,11 @@ function ad_processBBReadAll(_result, _dbRec) {
     // MAKE SURE THE FOLOWING PARAMETERS ARE CORRECT. PARAMETER:         //<=======
     //  7 = COLUMMN NUMBER WHICH CONTAINS THE DATABASE KEY.              //<=======
     //  8 = DATABASE PATH THE RECORDS WERE READ FROM.                    //<=======
-    ad_displayAll("t_userData", ad_adminArray, true, "", "", "", 
-                  7, DETAILS);                                                //<=======
+    ad_displayAll("t_userData", ad_adminArray, true, "", "", "",
+      7, DETAILS);                                                //<=======
   } else if (_result == 'n/a') {
-    ad_displayAll("t_userData", ad_adminArray, true, "", "", "", 
-                  7, DETAILS);                                                //<=======
+    ad_displayAll("t_userData", ad_adminArray, true, "", "", "",
+      7, DETAILS);                                                //<=======
   }
 }
 
@@ -217,26 +217,26 @@ function ad_userInput(_feildName, _data) {
   // Set up data types; 'a' for aplhabetic,   'n' for numeric  &  'b' for both
   // ENSURE THE FEILDS BELOW MATCH YOUR DB FILEDS                       //<=======
   //   AND THE DATATYPE IS CORRECTLY SET                                //<=======
-  var vd_dataTypes = {            
-    name:         'a',
-  	email:        'b',
+  var vd_dataTypes = {
+    name: 'a',
+    email: 'b',
     // Left photoURL out - its so long the table will be too wide for screen
     //photoURL:   'b', 
-    gameName:     'b',
-    phone:        'n',
-    uid:          'b',
+    gameName: 'b',
+    phone: 'n',
+    uid: 'b',
 
-    score:        'n',
+    score: 'n',
 
   };
-    
+
   if (vd_dataTypes[_feildName] == 'n') {
-    temp = Number(_data); 
+    temp = Number(_data);
     if (isNaN(temp)) {
       return [false, _data];
-    }  
+    }
     return [true, temp];
-  } 
+  }
 
   else {
     return [true, _data];
@@ -322,7 +322,7 @@ function ad_displayAll(_tableId, _array, _action, _hideId1, _hideId2, _showId, _
 /**************************************************************/
 function ad_genTableHead(_tableInfo, _fieldNames, _action) {
   console.log('ad_genTableHead: ');
-  
+
   let thead = _tableInfo.createTHead();
   let row = thead.insertRow();
 
@@ -365,7 +365,7 @@ function ad_genTableEntry(_tableInfo, _array, _action, _tableId, _item, _path) {
       var button = document.createElement('input');
 
       // set the attributes.
-      button.setAttribute('type',  'button');
+      button.setAttribute('type', 'button');
       button.setAttribute('value', 'Delete');
 
       // add button's "onclick" event.         
@@ -391,8 +391,8 @@ function ad_genTableEntry(_tableInfo, _array, _action, _tableId, _item, _path) {
 // Input:  table id
 /**************************************************************/
 function ad_clickEditCell(_tableId, _item, _path) {
-  console.log('ad_clickEditCell: path = ' + _path + ', item = ' + _item); 
-  
+  console.log('ad_clickEditCell: path = ' + _path + ', item = ' + _item);
+
   let table = document.getElementById(_tableId);
   let editingTd;
   var cell;
@@ -401,7 +401,7 @@ function ad_clickEditCell(_tableId, _item, _path) {
   var dbFieldName;
 
   //document.querySelector("table").addEventListener("click", function(event) {
-  table.onclick = function(event) { 
+  table.onclick = function(event) {
     //console.log('table.onclick: click event called. path = ' + _path); 
     // 4 possible targets:                
     let target = event.target.closest('.edit-cancel,.edit-ok,td');
@@ -434,7 +434,7 @@ function ad_clickEditCell(_tableId, _item, _path) {
     td.classList.add('edit-td'); // td is in edit state, CSS also styles the area inside
 
     let textArea = document.createElement('textarea');
-    textArea.style.width  = td.clientWidth + 'px';
+    textArea.style.width = td.clientWidth + 'px';
     textArea.style.height = td.clientHeight + 'px';
     textArea.className = 'edit-area';
 
@@ -444,7 +444,7 @@ function ad_clickEditCell(_tableId, _item, _path) {
     textArea.focus();
 
     td.insertAdjacentHTML("beforeEnd",
-      '<div class="edit-controls"><button class="edit-ok">OK' + 
+      '<div class="edit-controls"><button class="edit-ok">OK' +
       '</button><button class="edit-cancel">CANCEL</button></div>'
     );
   }
@@ -454,21 +454,21 @@ function ad_clickEditCell(_tableId, _item, _path) {
       td.innerHTML = td.firstChild.value;
       console.log('path/key = ' + _path + '/' + _dbKey +
         ',  field name = ' + _dbFieldName + ', data = ' + td.innerHTML);
-            
+
       var data = {};
-      var rtn  = [];      
-      rtn  = ad_userInput(_dbFieldName, td.innerHTML);
+      var rtn = [];
+      rtn = ad_userInput(_dbFieldName, td.innerHTML);
       if (rtn[0]) {        // User input validated ok?
         data[_dbFieldName] = rtn[1];
-        console.log("finishTdEdit: td.innerHTML = " + rtn[1] + 
-                    '  type = ' + typeof(rtn[1]));
+        console.log("finishTdEdit: td.innerHTML = " + rtn[1] +
+          '  type = ' + typeof (rtn[1]));
         td.style.background = 'red';
         ad_dbUpdateRec(_path, _dbKey, _dbFieldName, data, td);
       }
       else {
         td.style.background = 'red';
       }
-    } 
+    }
     else {
       td.innerHTML = editingTd.data;
     }
@@ -485,16 +485,16 @@ function ad_clickEditCell(_tableId, _item, _path) {
 // Return:
 /**************************************************************/
 function ad_dbUpdateRec(_path, _dbKey, _dbFieldName, _data, _td) {
-  console.log('ad_dbUpdateRec: _path/_dbKey = ' + _path + '/' + _dbKey + 
-              ',  _dbFieldName = ' + _dbFieldName + 
-              ',  _data = ' + _data + '  _td = ' + _td);
+  console.log('ad_dbUpdateRec: _path/_dbKey = ' + _path + '/' + _dbKey +
+    ',  _dbFieldName = ' + _dbFieldName +
+    ',  _data = ' + _data + '  _td = ' + _td);
 
   var dbRef = firebase.database().ref(_path + '/' + _dbKey);
   dbRef.update(_data).then(function() {
-      _td.style.background = 'Azure';
-      console.log("ad_dbUpdateRec: Update succeeded for " + _path + '/' + _dbKey);
-      //ad_delRow(_tableId, _row, item, _path);
-    })
+    _td.style.background = 'Azure';
+    console.log("ad_dbUpdateRec: Update succeeded for " + _path + '/' + _dbKey);
+    //ad_delRow(_tableId, _row, item, _path);
+  })
     .catch(function(error) {
       console.log("ad_dbUpdateRec: Update failed for " +
         _path + '/' + _dbKey + ': ' + error.message);
@@ -509,8 +509,8 @@ function ad_dbUpdateRec(_path, _dbKey, _dbFieldName, _data, _td) {
 // Return:
 /**************************************************************/
 function ad_dbDelRec(_tableId, _row, _item, _path) {
-  console.log('ad_dbDelRec: _tableId/_row = ' + _tableId + '/' + _row + 
-              ',  _item = ' + _item + ',  _path = ' + _path);
+  console.log('ad_dbDelRec: _tableId/_row = ' + _tableId + '/' + _row +
+    ',  _item = ' + _item + ',  _path = ' + _path);
 
   var i = _row.parentNode.parentNode.rowIndex;
   var key = document.getElementById(_tableId).rows[i].cells.item(_item).innerHTML;
@@ -518,9 +518,9 @@ function ad_dbDelRec(_tableId, _row, _item, _path) {
 
   var dbRef = firebase.database().ref(_path + '/' + key);
   dbRef.remove().then(function() {
-      console.log("ad_dbDelRec: Remove succeeded for " + _path + '/' + key);
-      ad_delRow(_tableId, _row);
-    })
+    console.log("ad_dbDelRec: Remove succeeded for " + _path + '/' + key);
+    ad_delRow(_tableId, _row);
+  })
     .catch(function(error) {
       console.log("ad_dbDelRec: Remove failed for " +
         _path + '/' + key + ': ' + error.message);
@@ -536,7 +536,7 @@ function ad_dbDelRec(_tableId, _row, _item, _path) {
 /**************************************************************/
 function ad_delRow(_tableId, _row) {
   console.log('ad_delRow: _tableId/_row = ' + _tableId + '/' + _row);
-  
+
   var i = _row.parentNode.parentNode.rowIndex;
   console.log('ad_delRow: i = ' + i); //DIAG
   document.getElementById(_tableId).deleteRow(i);
@@ -550,7 +550,7 @@ function ad_delRow(_tableId, _row) {
 /**************************************************************/
 function ad_enterEvent(_tableId) {
   //console.log('ad_enterEvent: _tableId = ' + _tableId);
-  
+
   // Listen for typing into a cell - display what is being typed into the cell.
   document.getElementById(_tableId).addEventListener("input", function(event) {
     var td = event.target;
@@ -577,7 +577,7 @@ function ad_enterEvent(_tableId) {
 /**************************************************************/
 function ad_clickCell(_tableId) {
   //console.log('ad_clickCell: _tableId = ' + _tableId);
-  
+
   // Click on cell to display its contents
   document.querySelector("table").addEventListener("click", function(event) {
     var td = event.target;

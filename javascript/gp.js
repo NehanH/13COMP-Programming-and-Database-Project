@@ -13,10 +13,10 @@
 // Input:  userDetails from session storage
 // Return: Creates object with userDetails (ss_userDetails)
 /**************************************************************/
-function saveSS(){
- var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
+function saveSS() {
+  var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
   console.log(ss_userDetails.photoURL);
-  console.log(ss_userDetails.gameName);    
+  console.log(ss_userDetails.gameName);
   console.log(ss_userDetails.win);
   console.log(ss_userDetails.loss);
   fb_readRec(DETAILS, userDetails.win, userDetails);
@@ -34,12 +34,12 @@ function saveSS(){
 // Input:  n/a
 // Return: n/a
 /**************************************************************/
-function lobbyButton(){
+function lobbyButton() {
   document.getElementById("gp").style.display = "none";
   document.getElementById("ls").style.display = "block";
 }
 
-function fakeButton(){
+function fakeButton() {
   alert('This is just for show, pick Rock Paper Scissors To Play The Game!')
 }
 
@@ -50,15 +50,15 @@ function fakeButton(){
 // Input:  n/a
 // Return:  n/a
 /*****************************************************/
-function readAdminData(){
+function readAdminData() {
   var ss_userDetails = JSON.parse(sessionStorage.getItem("details"));
   var adminRef = firebase.database().ref('admin/' + ss_userDetails.name);
   adminRef.on('value', (snapshot) => {
-  var data = snapshot.val();
-    if(ss_userDetails.uid == data.isAdmin){
+    var data = snapshot.val();
+    if (ss_userDetails.uid == data.isAdmin) {
       adminButtonDisplay()
     }
-});
+  });
 }
 
 /*****************************************************/
@@ -68,6 +68,6 @@ function readAdminData(){
 // Input:  n/a
 // Return:  n/a
 /*****************************************************/
-function adminButtonDisplay(){
-   document.getElementById("b_lpAdmin").style.display = "block";
+function adminButtonDisplay() {
+  document.getElementById("b_lpAdmin").style.display = "block";
 }

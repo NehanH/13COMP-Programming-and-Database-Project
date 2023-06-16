@@ -356,7 +356,7 @@ function winnerCalc(player1, player2) {
     }
     showGameEndBtn()
   } else if (player1 === 'Paper' && player2 === 'Rock') {
-     winnerParagraph.textContent = 'Player 1 Wins!'
+    winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -425,7 +425,7 @@ function winnerCalc(player1, player2) {
     }
     showGameEndBtn()
   } else if (player1 === 'Paper' && player2 === 'Scissors') {
-     winnerParagraph.textContent = 'Player 2 Wins!'
+    winnerParagraph.textContent = 'Player 2 Wins!'
     if (playerNum == 'player2') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -448,7 +448,7 @@ function winnerCalc(player1, player2) {
     }
     showGameEndBtn()
   } else if (player1 === 'Scissors' && player2 === 'Paper') {
-     winnerParagraph.textContent = 'Player 1 Wins!'
+    winnerParagraph.textContent = 'Player 1 Wins!'
     if (playerNum == 'player1') {
       const userWinsRef = firebase.database().ref('userDetails/' + userDetails.uid + '/' + 'win');
       userWinsRef.once('value', (snapshot) => {
@@ -471,7 +471,7 @@ function winnerCalc(player1, player2) {
     }
     showGameEndBtn()
   } else if (player1 === player2) {
-     winnerParagraph.textContent = 'Draw!'
+    winnerParagraph.textContent = 'Draw!'
     showGameEndBtn()
   }
 }
@@ -598,11 +598,12 @@ function runDisconnect() {
       if (lobbyData) {
         alert('p2 has disconnected returning to lobby select')
         document.getElementById("RPS").style.display = "none";
-        document.getElementById("homeBtn").style.display = "none";
-        document.getElementById("rematchBtn").style.display = "none";
         document.getElementById("ls").style.display = "block";
         lobbyRef.remove();
         lobbyRef.onDisconnect().cancel();
+        document.getElementById("homeBtn").style.display = "none";
+        document.getElementById("rematchBtn").style.display = "none";
+        winnerParagraph.textContent = ''
         refreshLobby()
       }
     })
@@ -613,11 +614,12 @@ function runDisconnect() {
       if (lobbyData) {
         alert('p1 has disconnected returning to lobby select')
         document.getElementById("RPS").style.display = "none";
-        document.getElementById("homeBtn").style.display = "none";
-        document.getElementById("rematchBtn").style.display = "none";
         document.getElementById("ls").style.display = "block";
         lobbyRef.remove();
         lobbyRef.onDisconnect().cancel();
+        document.getElementById("homeBtn").style.display = "none";
+        document.getElementById("rematchBtn").style.display = "none";
+        winnerParagraph.textContent = ''
         refreshLobby()
       }
     })
@@ -651,7 +653,7 @@ function gameHomeBtn() {
 }
 /**************************************************************/
 // leaderboard()
-// Called by keaderboard button
+// Called by leaderboard button
 // displays leaderboard
 // Input:  n/a
 // Return: n/a

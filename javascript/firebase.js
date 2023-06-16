@@ -8,20 +8,20 @@
 *************************************************************/
 function fb_initialise() {
   var firebaseConfig = {
-  apiKey: "AIzaSyCs10NnQ4BIdtlDxmGMoLJgZ-OkNIu6VFM",
-  authDomain: "comp-nehan-hettiarachchi.firebaseapp.com",
-  databaseURL: "https://comp-nehan-hettiarachchi-default-rtdb.firebaseio.com",
-  projectId: "comp-nehan-hettiarachchi",
-  storageBucket: "comp-nehan-hettiarachchi.appspot.com",
-  messagingSenderId: "72222490884",
-  appId: "1:72222490884:web:2446be6e4af2a954fa5051",
-  measurementId: "G-8MEZ1VQRTY"
+    apiKey: "AIzaSyCs10NnQ4BIdtlDxmGMoLJgZ-OkNIu6VFM",
+    authDomain: "comp-nehan-hettiarachchi.firebaseapp.com",
+    databaseURL: "https://comp-nehan-hettiarachchi-default-rtdb.firebaseio.com",
+    projectId: "comp-nehan-hettiarachchi",
+    storageBucket: "comp-nehan-hettiarachchi.appspot.com",
+    messagingSenderId: "72222490884",
+    appId: "1:72222490884:web:2446be6e4af2a954fa5051",
+    measurementId: "G-8MEZ1VQRTY"
   };
-  
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  console.log(firebase);	
-		
+  console.log(firebase);
+
   database = firebase.database();
 }
 /**************************************************************/
@@ -38,15 +38,15 @@ function fb_login(_dataRec) {
   function newLogin(user) {
     if (user) {
       // user is signed in, so save Google login details
-      _dataRec.uid      = user.uid;
-      _dataRec.email    = user.email;
-      _dataRec.name     = user.displayName;
+      _dataRec.uid = user.uid;
+      _dataRec.email = user.email;
+      _dataRec.name = user.displayName;
       _dataRec.photoURL = user.photoURL;
       _dataRec.gameName = user.gameName;
-      _dataRec.phone    = user.phone;
+      _dataRec.phone = user.phone;
       loginStatus = 'logged in';
       console.log('fb_login: status = ' + loginStatus);
-    } 
+    }
     else {
       // user NOT logged in, so redirect to Google login
       loginStatus = 'logged out';
@@ -55,25 +55,25 @@ function fb_login(_dataRec) {
       var provider = new firebase.auth.GoogleAuthProvider();
       //firebase.auth().signInWithRedirect(provider); // Another method
       firebase.auth().signInWithPopup(provider).then(function(result) {
-        _dataRec.uid      = result.user.uid;
-        _dataRec.email    = result.user.email;
-        _dataRec.name     = result.user.displayName;
+        _dataRec.uid = result.user.uid;
+        _dataRec.email = result.user.email;
+        _dataRec.name = result.user.displayName;
         _dataRec.photoURL = result.user.photoURL;
         _dataRec.gameName = result.user.gameName;
-        _dataRec.phone    = result.user.phone;
+        _dataRec.phone = result.user.phone;
         loginStatus = 'logged in via popup';
         console.log('fb_login: status via popup= ' + loginStatus);
       })
-      // Catch errors
-      .catch(function(error) {
-        if(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          loginStatus = 'error: ' + error.code;
-          console.log('fb_login: error code = ' + errorCode + 
-                      '    ' + errorMessage);
-        }
-      });
+        // Catch errors
+        .catch(function(error) {
+          if (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            loginStatus = 'error: ' + error.code;
+            console.log('fb_login: error code = ' + errorCode +
+              '    ' + errorMessage);
+          }
+        });
     }
   }
 }
@@ -83,15 +83,15 @@ function fb_login(_dataRec) {
 // Input:  path to write to, the key, data to write
 // Return: 
 /*****************************************************/
-function fb_writeRec(_path, _key, _data) { 
-      console.log('fb_WriteRec: path= ' + _path + '  key= ' + _key +
-                 '  data= ' + _data.name + '/' + _data.gameName);
-    firebase.database().ref(_path + '/' + _key).set(_data,
-      function(error){
-        if (error) {
-     writeStatus = 'failed'
+function fb_writeRec(_path, _key, _data) {
+  console.log('fb_WriteRec: path= ' + _path + '  key= ' + _key +
+    '  data= ' + _data.name + '/' + _data.gameName);
+  firebase.database().ref(_path + '/' + _key).set(_data,
+    function(error) {
+      if (error) {
+        writeStatus = 'failed'
       } else {
-      writeStatus = 'ok'
+        writeStatus = 'ok'
       }
     }
   );
@@ -99,7 +99,7 @@ function fb_writeRec(_path, _key, _data) {
 
 function fb_processAll(_data, dbData, dbKeys) {
   dbData = dbData.val();
-  for(i=0; i < dbKeys.length; i++) {
+  for (i = 0; i < dbKeys.length; i++) {
     let key = dbKeys[i];
     _data.push({
       username: dbData[key].username,
@@ -116,26 +116,26 @@ function fb_processAll(_data, dbData, dbKeys) {
 function fb_readAll(_path, _data, _processAll) {
   console.log('fb_readAll: path= ' + _path);
 
-    readStatus = 'waiting'
+  readStatus = 'waiting'
   firebase.database().ref(_path).once("value", gotRecord, readErr);
 
-  function gotRecord(snapshot){
-    if(snapshot.val() == null){
+  function gotRecord(snapshot) {
+    if (snapshot.val() == null) {
       readStatus = 'no record'
     } else {
       readStatus = 'ok'
-      let dbData        = snapshot.val();
+      let dbData = snapshot.val();
       console.log(dbData);
       let dbKeys = Object.keys(dbData);
-    _processAll(_data, snapshot, dbKeys)
+      _processAll(_data, snapshot, dbKeys)
 
     }
   };
-  function readErr (error){
+  function readErr(error) {
     readStatus = 'failed'
-     _processAll(_data, snapshot, dbKeys)
+    _processAll(_data, snapshot, dbKeys)
   }
-  
+
 }
 
 /*****************************************************/
@@ -144,36 +144,36 @@ function fb_readAll(_path, _data, _processAll) {
 // Input:  path & key of record to read and where to save it
 // Return:  
 /*****************************************************/
-function fb_readRec(_path, _key, _data) {	
-    console.log('fb_readRec: path= ' + _path + '  key= ' + _key);
+function fb_readRec(_path, _key, _data) {
+  console.log('fb_readRec: path= ' + _path + '  key= ' + _key);
 
   readStatus = 'waiting'
   firebase.database().ref(_path + '/' + _key).once("value", gotRecord, readErr);
 
-  function gotRecord(snapshot){
-    if(snapshot.val() == null){
+  function gotRecord(snapshot) {
+    if (snapshot.val() == null) {
       readStatus = 'no record'
     } else {
       readSuccess = 'yes'
       console.log(readStatus);
-      var dbData        = snapshot.val();
-      _data.uid         = dbData.uid;
-      _data.name        = dbData.name;
-      _data.email       = dbData.email;
-      _data.photoURL    = dbData.photoURL;
-      _data.win         = dbData.win;
-      _data.loss        = dbData.loss;
-      _data.gameName    = dbData.gameName;
-      _data.phone       = dbData.phone;
+      var dbData = snapshot.val();
+      _data.uid = dbData.uid;
+      _data.name = dbData.name;
+      _data.email = dbData.email;
+      _data.photoURL = dbData.photoURL;
+      _data.win = dbData.win;
+      _data.loss = dbData.loss;
+      _data.gameName = dbData.gameName;
+      _data.phone = dbData.phone;
       console.log(dbData.gameName)
-      
+
     }
   };
 
-  function readErr (error){
+  function readErr(error) {
     readStatus = 'failed'
   }
-  
+
 }
 
 /*****************************************************/

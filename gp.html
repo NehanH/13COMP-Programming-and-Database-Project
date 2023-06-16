@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>13COMP Nehan Hettiarachchi</title>
   <meta charset="UTF-8">
@@ -7,117 +8,117 @@
   <meta name="keywords" content="12COMP, firebase, 'mini skills'">
   <meta name="author" content="nehan hettiarachchi">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Stylesheets *************************************************-->
-  <link rel="stylesheet"      
-        href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/4.7.0/css/font-    
+  <!-- Stylesheets *************************************************-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/4.7.0/css/font-    
         awesome.min.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">    
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="style.css">
-<!-- P5.js *************************************************-->
+  <!-- P5.js *************************************************-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
-<!-- Firebase *************************************************-->
+  <!-- Firebase *************************************************-->
   <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>  
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
   <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>  
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script> 
-<!-- Javascript Modules *************************************************-->
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+  <!-- Javascript Modules *************************************************-->
   <script defer src="javascript/main.js"></script>
-  <script defer src="javascript/firebase.js"></script> 
-  <script defer src="javascript/reg.js"></script> 
-  <script defer src="javascript/gp.js"></script> 
-  <script defer src="javascript/lobby_manager.js"></script> 
-  <script defer src="javascript/admin.js"></script> 
+  <script defer src="javascript/firebase.js"></script>
+  <script defer src="javascript/reg.js"></script>
+  <script defer src="javascript/gp.js"></script>
+  <script defer src="javascript/lobby_manager.js"></script>
+  <script defer src="javascript/admin.js"></script>
 </head>
-  <!--*************************************************************
+<!--*************************************************************
 			ADMIN PAGE 
   **************************************************************-->
-  <!-- CODE WAS COPIED FROM MY YEAR 12 PROJECT AND TAILORED TO FIT YEAR 13 -->
-  <section id="s_adminPage" class="">
-    <div class="w3-row">
-      <div class="w3-container  w3-col m10">
-        <h1 class="w3-wide">Admin page</h1>
-      </div>
+<!-- CODE WAS COPIED FROM MY YEAR 12 PROJECT AND TAILORED TO FIT YEAR 13 -->
+<section id="s_adminPage" class="">
+  <div class="w3-row">
+    <div class="w3-container  w3-col m10">
+      <h1 class="w3-wide">Admin page</h1>
     </div>
-    
-    <nav id="n_admin" class="w3-bar stickyNav">
-      <button id="b_adHome" class="w3-button w3-block w3-col m3 
-                                   w3-medium w3-ripple w3-border" 
-              onclick="ad_home()" value="Submit">home
-	  </button>
-      <button id="b_adUser" class="w3-button w3-block w3-col m3 
-                                   w3-medium w3-ripple w3-small w3-border" 
-              onclick="ad_user()" value="Submit">users
-      </button>
-    </nav>
-      
-    <div>
-      <div id="d_admin" class="w3-table-all w3-small
+  </div>
+
+  <nav id="n_admin" class="w3-bar stickyNav">
+    <button id="b_adHome" class="w3-button w3-block w3-col m3 
+                                   w3-medium w3-ripple w3-border" onclick="ad_home()" value="Submit">home
+    </button>
+    <button id="b_adUser" class="w3-button w3-block w3-col m3 
+                                   w3-medium w3-ripple w3-small w3-border" onclick="ad_user()" value="Submit">users
+    </button>
+  </nav>
+
+  <div>
+    <div id="d_admin" class="w3-table-all w3-small
                                w3-hoverable w3-border w3-bordered content">
-	    <table id="t_userData" class="w3-text-black"></table>
-	  </div>
+      <table id="t_userData" class="w3-text-black"></table>
     </div>
-  </section> 
+  </div>
+</section>
 <!-- Game Selection Page *************************************************-->
+
 <body onload="saveSS();">
   <section id="gp">
     <header class="gp_header">
-      <img class="gp_userDetails"id="userProfile"></img>
+      <img class="gp_userDetails" id="userProfile"></img>
       <p class="gp_userDetails" id="userName"></p>
       <p class="gp_userDetails" id="userWinLoss"></p>
     </header>
-    <button id="b_lpAdmin" 
-                class="w3-button w3-border w3-margin" 
-                onclick="ad_admin()">ADMIN
+    <button id="b_lpAdmin" class="w3-button w3-border w3-margin" onclick="ad_admin()">ADMIN
     </button>
     <div class="gp_buttons w3-center w3-container">
-      <h1 id="gp_title"class="w3-animate-opacity w3-center w3-wide">Game Selection</h1>
-      <button  class="button1 button w3-button w3-white w3-round-xxlarge" onclick="fakeButton()">Tic Tac Toe</button>
-      <button id="speedButton" class="button1 button w3-button w3-white w3-round-xxlarge" onclick="lobbyButton()">Rock Paper Scissors</button>
-      <button  class="button1 button w3-button w3-white w3-round-xxlarge" onclick="fakeButton()">Space Invaders</button>
+      <h1 id="gp_title" class="w3-animate-opacity w3-center w3-wide">Game Selection</h1>
+      <button class="button1 button w3-button w3-white w3-round-xxlarge" onclick="fakeButton()">Tic Tac Toe</button>
+      <button id="speedButton" class="button1 button w3-button w3-white w3-round-xxlarge" onclick="lobbyButton()">Rock
+        Paper Scissors</button>
+      <button class="button1 button w3-button w3-white w3-round-xxlarge" onclick="fakeButton()">Space Invaders</button>
     </div>
   </section>
-<!-- Lobbies Section *************************************************-->
+  <!-- Lobbies Section *************************************************-->
   <section id="ls">
     <div id="lobbyContainer" class="w3-center w3-display-bottommiddle">
       <button onclick="createLobby()" class="button1 button w3-button w3-white w3-round-xxlarge">Create</button>
-      <button onclick="refreshLobby()"class="button1 button w3-button w3-white w3-round-xxlarge">Refresh</button>
+      <button onclick="refreshLobby()" class="button1 button w3-button w3-white w3-round-xxlarge">Refresh</button>
       <button onclick="leaderboard()" class="button1 button w3-button w3-white w3-round-xxlarge">Leaderboard</button>
     </div>
-    <h1 id="ls_title"class="w3-animate-opacity w3-center w3-wide">Game Lobbies</h1>
-  <div id="RPS_gameLobby">
-    <table class="RPSLobby w3-table w3-display-middle w3-bordered">
-      <thead>
-        <tr>
-          <th class="lobbyName comfortaaFont">Game<th>
+    <h1 id="ls_title" class="w3-animate-opacity w3-center w3-wide">Game Lobbies</h1>
+    <div id="RPS_gameLobby">
+      <table class="RPSLobby w3-table w3-display-middle w3-bordered">
+        <thead>
+          <tr>
+            <th class="lobbyName comfortaaFont">Game
+            <th>
             <th class="comfortaaFont">Players</th>
-        </tr>
-      </thead>
-      <tbody id="RPS_tableBody"></tbody>
-    </table>
-  </div>
+          </tr>
+        </thead>
+        <tbody id="RPS_tableBody"></tbody>
+      </table>
+    </div>
   </section>
 
-<div id="waitingForUser" class="w3-modal" width="200px">
-   <div class="" width="200px">
-    <div class="w3-container">
-     <img class="waitingModal w3-display-middle" src="Images/waiting.gif">
-   </div>
+  <div id="waitingForUser" class="w3-modal" width="200px">
+    <div class="" width="200px">
+      <div class="w3-container">
+        <img class="waitingModal w3-display-middle" src="Images/waiting.gif">
+      </div>
+    </div>
   </div>
-</div>
 
   <!-- Leaderboard Section *************************************************-->
   <section id="lb">
-    <h1 id="ls_title"class="w3-animate-opacity w3-center w3-wide">Leaderboard</h1>
+    <h1 id="ls_title" class="w3-animate-opacity w3-center w3-wide">Leaderboard</h1>
     <table class="w3-table w3-display-middle w3-bordered" id="leaderboard"></table>
     <div id="lobbyContainer" class="w3-center w3-display-bottommiddle">
-      <button onclick="backToRps()" id="backToLobby_Btn" class="button1 button w3-button w3-white w3-round-xxlarge">Back To Lobbies</button>
-      <button onclick="refreshLeaderboard()" class="button1 button w3-button w3-white w3-round-xxlarge">Refresh Leaderboard</button>
+      <button onclick="backToRps()" id="backToLobby_Btn" class="button1 button w3-button w3-white w3-round-xxlarge">Back
+        To Lobbies</button>
+      <button onclick="refreshLeaderboard()" class="button1 button w3-button w3-white w3-round-xxlarge">Refresh
+        Leaderboard</button>
     </div>
   </section>
-<!-- Rock Paper Scissors Game *************************************************-->
+  <!-- Rock Paper Scissors Game *************************************************-->
   <section id="RPS">
     <div class="row">
       <div class="game-area col-md-12">
@@ -147,10 +148,11 @@
           </div>
         </div>
         <div class="w3-display-middle game-status">
-          <button  onclick="gameRematch()" id="rematchBtn">Rematch</button>
-          <button  onclick="gameHomeBtn()" id="homeBtn">Home</button>
+          <button onclick="gameRematch()" class="button w3-button w3-white w3-round-xxlarge"
+            id="rematchBtn">Rematch</button>
+          <button onclick="gameHomeBtn()" class="button w3-button w3-white w3-round-xxlarge" id="homeBtn">Home</button>
           <div class="score-tracker text-center">
-           <p id="winnerParagraph"></p>
+            <p id="winnerParagraph"></p>
           </div>
         </div>
 

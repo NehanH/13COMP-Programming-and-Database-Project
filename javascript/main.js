@@ -7,31 +7,31 @@
   V2: Added ss_store()
 *************************************************************/
 
-const DETAILS = "userDetails"; 
+const DETAILS = "userDetails";
 
 var loginStatus = ' ';
-var readStatus  = ' ';
+var readStatus = ' ';
 var writeStatus = ' ';
 var readSuccess = ' ';
 
 // userDetails object
 var userDetails = {
-  uid:      'n/a',
-  email:    'n/a',
-  name:     'n/a',
+  uid: 'n/a',
+  email: 'n/a',
+  name: 'n/a',
   photoURL: 'n/a',
-  win:      0,
-  loss:     0,
+  win: 0,
+  loss: 0,
   gameName: 'n/a',
-  phone:    'n/a',
+  phone: 'n/a',
 };
 
 // Setup function
-function setup(){
+function setup() {
   fb_initialise();
 }
 // Draw function
-function draw(){
+function draw() {
   // Set Form Name And Email
   regEmailName()
 }
@@ -42,8 +42,8 @@ function draw(){
 // Input:  userDetails Object
 // Return: n/a
 /**************************************************************/
-function ss_store(_key, _value){
-  sessionStorage.setItem(_key,  JSON.stringify(_value));
+function ss_store(_key, _value) {
+  sessionStorage.setItem(_key, JSON.stringify(_value));
 }
 /**************************************************************/
 // login()
@@ -58,16 +58,16 @@ function login() {
   console.log(loginStatus);
   const user = firebase.auth().currentUser;
   if (user && loginStatus == "logged in" && userDetails.gameName != null && userDetails.gameName != 'undefined') {
-  console.log(userDetails.gameName)
-  ss_store("details", userDetails);
-  regEmailName();
-  window.location.href = "/gp.html"
+    console.log(userDetails.gameName)
+    ss_store("details", userDetails);
+    regEmailName();
+    window.location.href = "/gp.html"
   } else if (user == null) {
-  console.log(userDetails.gameName)
-  document.getElementById("b_login").style.display = "none";
-  document.getElementById("lp").style.display = "none";
-  document.getElementById("rp").style.display = "block";
-  regEmailName();
+    console.log(userDetails.gameName)
+    document.getElementById("b_login").style.display = "none";
+    document.getElementById("lp").style.display = "none";
+    document.getElementById("rp").style.display = "block";
+    regEmailName();
   }
 }
 
